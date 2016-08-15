@@ -1,0 +1,30 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    # 3rd party
+    # http://php-and-symfony.matthiasnoback.nl/2012/10/symfony2-mongodb-odm-adding-the-missing-paramconverter/
+    doctrine_mongo_db_param_converter:
+        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
+        arguments: ["@doctrine_mongodb"]
+        tags:
+            - { name: request.param_converter, converter: doctrine.odm }
+
+    jms_serializer.doctrine_object_constructor:
+        class:        '%jms_serializer.doctrine_object_constructor.class%'
+        public:       false
+        arguments:    ["@doctrine_mongodb", "@jms_serializer.unserialize_object_constructor"]
+
+    jms_serializer.object_constructor:
+        alias: jms_serializer.doctrine_object_constructor
+
+    kernel.event_listener.json_request_transformer:
+        class: Qandidate\Common\Symfony\HttpKernel\EventListener\JsonRequestTransformerListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+
+    lexik.jwt_authentication.token_extractor.authorization_header_token_extractor:
+        class: Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor
+        arguments: ["Bearer", "Authorization"]

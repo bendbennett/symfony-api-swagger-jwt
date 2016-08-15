@@ -1,0 +1,54 @@
+services:
+    # listener
+    bendbennett_demo.listener.doctrine_mongo_listener:
+        class:   Bendbennett\DemoBundle\Listener\DoctrineMongoListener
+        arguments: ["@bendbennett_demo.service.active_jwt_service"]
+        tags:
+            -  { name: doctrine_mongodb.odm.event_listener, event: postLoad }
+
+    bendbennett_demo.listener.exception_listener:
+        class: Bendbennett\DemoBundle\Listener\ExceptionListener
+        tags:
+            -  { name: kernel.event_listener, event: kernel.exception }
+
+    # manager
+    bendbennett_demo.manager.user_manager:
+        class: Bendbennett\DemoBundle\Manager\UserManager
+        arguments: ["@doctrine_mongodb.odm.default_connection", "@doctrine_mongodb.odm.default_configuration", "@doctrine_mongodb.odm.event_manager", "@security.password_encoder"]
+
+    # security
+    bendbennett_demo.security.jwt_token_authenticator:
+        class: Bendbennett\DemoBundle\Security\JwtAuthenticator
+        arguments: ["@bendbennett_demo.manager.user_manager", "@lexik_jwt_authentication.encoder",  "@lexik.jwt_authentication.token_extractor.authorization_header_token_extractor"]
+
+    bendbennett_demo.security.user_voter:
+        class: Bendbennett\DemoBundle\Security\UserVoter
+        arguments: ["@request_stack", "@bendbennett_demo.service.active_jwt_service", "@bendbennett_demo.service.serializer_service"]
+        tags:
+            - { name: security.voter }
+        # small performance boost
+        public: false
+
+    # service
+    bendbennett_demo.service.active_jwt_service:
+        class: Bendbennett\DemoBundle\Service\ActiveJwtService
+        arguments: ["@request_stack", "@lexik_jwt_authentication.encoder", "@lexik.jwt_authentication.token_extractor.authorization_header_token_extractor"]
+
+    bendbennett_demo.service.authentication_service:
+        class: Bendbennett\DemoBundle\Service\AuthenticationService
+        arguments: ["@bendbennett_demo.manager.user_manager"]
+
+    bendbennett_demo.service.jwt_service:
+        class: Bendbennett\DemoBundle\Service\JwtService
+        arguments: [ "@request_stack", "@lexik_jwt_authentication.encoder", "%jwt_token_ttl%", "%jwt_registered_claims%", "%jwt_custom_claims%"]
+
+    bendbennett_demo.service.request_service:
+        class: Bendbennett\DemoBundle\Service\RequestService
+
+    bendbennett_demo.service.serializer_service:
+        class: Bendbennett\DemoBundle\Service\SerializerService
+        arguments: ["@jms_serializer", "@bendbennett_demo.service.request_service"]
+
+    bendbennett_demo.service.validator_service:
+        class: Bendbennett\DemoBundle\Service\ValidatorService
+        arguments: ['@validator', '@bendbennett_demo.manager.user_manager']

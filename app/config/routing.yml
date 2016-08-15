@@ -1,0 +1,7 @@
+bendbennett_demo:
+    resource: "@BendbennettDemoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+logout:
+    path: /logout
