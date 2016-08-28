@@ -3,12 +3,18 @@ Symfony 2 API with Swagger Documentation and JWT Authentication and Authorizatio
 
 Requirements
 ----
-* Requires PHP 7 and Mongo 3.2+ - https://github.com/bendbennett/vagrant-php7-mysql5-mongo3.
+* Requires PHP 7 and Mongo 3.2+
+    * Vagrant - https://github.com/bendbennett/vagrant-php7-mysql5-mongo3
+    * Docker - https://github.com/bendbennett/docker-compose-php7-mongo3
+        * you'll need to update `parameters.yml.dist` and change `mongodb_server: mongodb://localhost:27017` to `mongodb_server: mongodb://mongo:27017` if you're using this dockerized env.
 
 Set-up
 ----
 * Clone this repo.
 * Run `composer install`.
+    * if you're using the Vagrant env (linked above) then composer install will run during the ansible provisioning
+    * if you're using the Docker env (linked above) then composer install will run during docker-compose up
+        * you can tail the logs using `docker logs -f {name_of_docker_container_running_composer}`
 
 Swagger Docs
 ----
