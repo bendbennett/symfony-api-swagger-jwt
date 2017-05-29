@@ -3,6 +3,6 @@ https://github.com/swagger-api/swagger-ui/releases
 
 Currently using 2.1.4
 
-    rm -rf app/cache/*
+    rm -rf var/cache/*
     app/console assets:install web
     app/console assetic:dump
