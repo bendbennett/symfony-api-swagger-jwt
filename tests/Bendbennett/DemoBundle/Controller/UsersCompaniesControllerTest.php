@@ -1,6 +1,6 @@
 <?php
 
-namespace Bendbennett\DemoBundle\Tests\Controller;
+namespace Tests\Bendbennett\DemoBundle\Controller;
 
 class UsersCompaniesControllerTest extends AbstractController
 {
