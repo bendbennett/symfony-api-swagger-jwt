@@ -19,19 +19,19 @@ class UsersController extends Controller
 {
     /**
      * @var \Bendbennett\DemoBundle\Manager\UserManager
-     * @DI\Inject("bendbennett_demo.manager.user_manager")
+     * @DI\Inject("Bendbennett\DemoBundle\Manager\UserManager")
      */
     protected $userManager;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\SerializerServiceInterface
-     * @DI\Inject("bendbennett_demo.service.serializer_service")
+     * @DI\Inject("Bendbennett\DemoBundle\Service\SerializerService")
      */
     protected $serializerService;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\ValidatorServiceInterface
-     * @DI\Inject("bendbennett_demo.service.validator_service")
+     * @DI\Inject("Bendbennett\DemoBundle\Service\ValidatorService")
      */
     protected $validatorService;
 

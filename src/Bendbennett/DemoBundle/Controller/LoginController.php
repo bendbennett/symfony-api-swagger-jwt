@@ -18,19 +18,19 @@ class LoginController extends Controller
 {
     /**
      * @var \Bendbennett\DemoBundle\Service\AuthenticationServiceInterface
-     * @DI\Inject("bendbennett_demo.service.authentication_service")
+     * @DI\Inject("Bendbennett\DemoBundle\Service\AuthenticationService")
      */
     protected $authenticationService;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\JwtServiceInterface
-     * @DI\Inject("bendbennett_demo.service.jwt_service")
+     * @DI\Inject("Bendbennett\DemoBundle\Service\JwtService")
      */
     protected $jwtService;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\ActiveJwtServiceInterface
-     * @DI\Inject("bendbennett_demo.service.active_jwt_service")
+     * @DI\Inject("Bendbennett\DemoBundle\Service\ActiveJwtService")
      */
     protected $activeJwtService;
 

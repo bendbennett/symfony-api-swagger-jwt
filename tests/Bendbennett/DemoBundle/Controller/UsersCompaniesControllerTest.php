@@ -44,7 +44,7 @@ class UsersCompaniesControllerTest extends AbstractController
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $serializerService = $this->bootedTestKernel->getContainer()->get('bendbennett_demo.service.serializer_service');
+        $serializerService = $this->bootedTestKernel->getContainer()->get('Bendbennett\DemoBundle\Service\SerializerService');
         $user = $serializerService->deserializeUserFromJson($client->getResponse()->getContent(), 'json', $userOne->getId());
 
         $this->assertEquals($userOneNewRoles, $user->getUserCompanyById($userOneCompanyId)->getRoles());

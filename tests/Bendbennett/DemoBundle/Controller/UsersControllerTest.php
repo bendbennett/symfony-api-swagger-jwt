@@ -403,8 +403,8 @@ class UsersControllerTest extends AbstractController
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $serializerService = $this->bootedTestKernel->getContainer()->get('bendbennett_demo.service.serializer_service');
-        $userManager = $this->bootedTestKernel->getContainer()->get('bendbennett_demo.manager.user_manager');
+        $serializerService = $this->bootedTestKernel->getContainer()->get('Bendbennett\DemoBundle\Service\SerializerService');
+        $userManager = $this->bootedTestKernel->getContainer()->get('Bendbennett\DemoBundle\Manager\UserManager');
 
         $user = $serializerService->deserializeUserFromJson($client->getResponse()->getContent(), 'json', $userOne->getId());
         $userFromDb = $userManager->getUser($userOne->getId());
@@ -438,7 +438,7 @@ class UsersControllerTest extends AbstractController
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $userManager = $this->bootedTestKernel->getContainer()->get('bendbennett_demo.manager.user_manager');
+        $userManager = $this->bootedTestKernel->getContainer()->get('Bendbennett\DemoBundle\Manager\UserManager');
         $userManager->getUser($userOne->getId());
     }
 }

@@ -19,7 +19,7 @@
     "provide": { "ext-mongo": "1.6.12" },
     "require": {
         "php": ">=7.1.0",
-        "symfony/symfony": "3.2.*",
+        "symfony/symfony": "3.3.*",
         "symfony/monolog-bundle": "~3.1",
         "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "^3.0.2",

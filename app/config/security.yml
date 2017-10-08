@@ -36,7 +36,7 @@ security:
             stateless: true
             guard:
                 authenticators:
-                    - bendbennett_demo.security.jwt_token_authenticator
+                    - Bendbennett\DemoBundle\Security\JwtAuthenticator
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
