@@ -5,7 +5,7 @@ namespace Bendbennett\DemoBundle\Controller;
 use Bendbennett\DemoBundle\Document\UserCompany;
 use JMS\DiExtraBundle\Annotation as DI;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,26 +38,28 @@ class LoginController extends Controller
      * @Config\Route("")
      * @Config\Method({"POST"})
      *
-     * @SWG\Definition(
-     *     definition="Login",
+     * @OA\Info(title="stuff", version="1.0")
+     *
+     * @OA\Schema(
+     *     schema="Login",
      *     required={"email", "password"},
      *     type="object",
-     *     @SWG\Property(property="email", type="string", example="administrator@demo.com"),
-     *     @SWG\Property(property="password", type="string", example="admin"),
-     *     @SWG\Property(property="companyId", type="string", example="xyz789"),
+     *     @OA\Property(property="email", type="string", example="administrator@demo.com"),
+     *     @OA\Property(property="password", type="string", example="admin"),
+     *     @OA\Property(property="companyId", type="string", example="xyz789"),
      * )
-     * @SWG\Post(
+     * @OA\Post(
      *     path="/login",
      *     summary="Login",
      *     description="Login and obtain JWT. The companyId parameter is optional but allows direct login to specific user company.",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Login"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Body", in="body", type="string", required=true, @SWG\Schema(ref="#/definitions/Login"),),
-     *     @SWG\Response(response="200", description="Success")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/Login")),
+     *     @OA\Response(response="200", description="Success")
      * )
      */
+//     in="body",
     public function login(Request $request) : JsonResponse
     {
         $email = $request->request->get('email');
@@ -91,17 +93,7 @@ class LoginController extends Controller
      * This ensures that any user with a legitimate JWT which contains role(s) that include
      * "User" can access this endpoint (see role_hierarchy in security.yml)
      *
-     * @SWG\Put(
-     *     path="/login",
-     *     summary="Refresh JWT",
-     *     description="Supply a valid JWT to obtain a new JWT.",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
-     *     tags={"Login"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Response(response="200", description="Success")
-     * )
+
      */
     public function refreshJwt() : JsonResponse
     {
@@ -121,24 +113,6 @@ class LoginController extends Controller
      * This ensures that any user with a legitimate JWT which contains role(s) that include
      * "User" can access this endpoint (see role_hierarchy in security.yml)
      *
-     * @SWG\Definition(
-     *     definition="SwitchCompany",
-     *     type="object",
-     *     @SWG\Property(property="companyId", type="string", example="xyz789"),
-     * )
-     * @SWG\Post(
-     *     path="/login/company/{companyId}",
-     *     summary="Switch Company",
-     *     description="Supply companyId and valid JWT to generate a new JWT specific to the companyId supplied.",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
-     *     tags={"Login"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Parameter(name="companyId", in="path", type="string", required=true, default="xyz789"),
-     *     @SWG\Parameter(name="Body", in="body", type="string", @SWG\Schema(ref="#/definitions/SwitchCompany"),),
-     *     @SWG\Response(response="200", description="Success")
-     * )
      */
     public function switchCompany(string $companyId) : JsonResponse
     {

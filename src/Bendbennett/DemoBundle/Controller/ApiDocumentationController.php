@@ -32,7 +32,7 @@ class ApiDocumentationController extends Controller
      */
     public function jsonAction()
     {
-        $swagger = \Swagger\scan($this->container->getParameter('kernel.root_dir'). '/../src');
+        $swagger = \OpenApi\scan($this->container->getParameter('kernel.root_dir'). '/../src');
 
         return new JsonResponse($swagger);
     }
