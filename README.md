@@ -19,7 +19,6 @@ Set-up
 Swagger Docs
 ----
 * The Swagger docs for the API are secured with Basic Http Authentication (`swagger - swagger`) and should be visible at `http://{your_local_host}/app_dev.php/api#`.
-* To generate the docs for "production" (i.e., `http://{your_local_host}/api#`) run `php app/console assetic:dump --env=prod --no-debug`.
 * To change the password for the docs run the following and then add the `Encoded password` to `parameters.yml.dist` and run `composer install`:
 &nbsp;
 

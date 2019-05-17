@@ -52,12 +52,6 @@ lexik_jwt_authentication:
 #    pass_phrase:      "%jwt_key_pass_phrase%"
     token_ttl:        "%jwt_token_ttl%"
 
-assetic:
-    debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
-    filters:
-        cssrewrite: ~
-
 hb_swagger_ui:
   directory: "%kernel.root_dir%/../api/"
   files:
