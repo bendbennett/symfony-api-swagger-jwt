@@ -58,6 +58,7 @@ class User implements UserInterface
      * @MongoDB\EmbedMany(targetDocument="UserCompany")
      * @JMS\Type("ArrayCollection<Bendbennett\DemoBundle\Document\UserCompany>")
      * @JMS\SerializedName("userCompanies")
+     * @OA\Property(type="array", @OA\Items(ref="#/components/schemas/UserCompany"))
      */
     private $userCompanies = array();
 

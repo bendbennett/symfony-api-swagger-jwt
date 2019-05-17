@@ -38,7 +38,7 @@ class LoginController extends Controller
      * @Config\Route("")
      * @Config\Method({"POST"})
      *
-     * @OA\Info(title="stuff", version="1.0")
+     * @OA\Info(title="API", version="1.0")
      *
      * @OA\Schema(
      *     schema="Login",
@@ -59,7 +59,6 @@ class LoginController extends Controller
      *     @OA\Response(response="200", description="Success")
      * )
      */
-//     in="body",
     public function login(Request $request) : JsonResponse
     {
         $email = $request->request->get('email');
@@ -93,7 +92,16 @@ class LoginController extends Controller
      * This ensures that any user with a legitimate JWT which contains role(s) that include
      * "User" can access this endpoint (see role_hierarchy in security.yml)
      *
-
+     * @OA\Put(
+     *     path="/login",
+     *     summary="Refresh JWT",
+     *     description="Supply a valid JWT to obtain a new JWT.",
+     *     tags={"Login"},
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Response(response="200", description="Success")
+     * )
      */
     public function refreshJwt() : JsonResponse
     {
@@ -113,6 +121,23 @@ class LoginController extends Controller
      * This ensures that any user with a legitimate JWT which contains role(s) that include
      * "User" can access this endpoint (see role_hierarchy in security.yml)
      *
+     * @OA\Schema(
+     *     schema="SwitchCompany",
+     *     type="object",
+     *     @OA\Property(property="companyId", type="string", example="xyz789"),
+     * )
+     * @OA\Post(
+     *     path="/login/company/{companyId}",
+     *     summary="Switch Company",
+     *     description="Supply companyId and valid JWT to generate a new JWT specific to the companyId supplied.",
+     *     tags={"Login"},
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Parameter(name="companyId", in="path", required=true, @OA\Schema(type="string", default="xyz789")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/SwitchCompany")),
+     *     @OA\Response(response="200", description="Success")
+     * )
      */
     public function switchCompany(string $companyId) : JsonResponse
     {
