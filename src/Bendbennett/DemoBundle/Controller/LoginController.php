@@ -4,8 +4,8 @@ namespace Bendbennett\DemoBundle\Controller;
 
 use Bendbennett\DemoBundle\Document\UserCompany;
 use JMS\DiExtraBundle\Annotation as DI;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use OpenApi\Annotations as OA;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,8 +37,6 @@ class LoginController extends Controller
     /**
      * @Config\Route("")
      * @Config\Method({"POST"})
-     *
-     * @OA\Info(title="API", version="1.0")
      *
      * @OA\Schema(
      *     schema="Login",

@@ -4,7 +4,7 @@ namespace Bendbennett\DemoBundle\Controller;
 
 use JMS\DiExtraBundle\Annotation as DI;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,19 +37,18 @@ class UsersCompaniesController extends Controller
      * @Config\Route("")
      * @Config\Method({"PATCH"})
      *
-     * @SWG\Patch(
+     * @OA\Patch(
      *     path="/users/{userId}/companies/{companyId}",
      *     summary="Update User Company",
      *     description="Update user company.",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Users - Companies"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Parameter(name="userId", in="path", type="string", required=true),
-     *     @SWG\Parameter(name="companyId", in="path", type="string", required=true),
-     *     @SWG\Parameter(name="Body", in="body", type="string", required=true, @SWG\Schema(ref="#/definitions/UserCompany"),),
-     *     @SWG\Response(response="200", description="Success")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Parameter(name="companyId", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/UserCompany")),
+     *     @OA\Response(response="200", description="Success")
      * )
      */
     public function editAction(Request $request, string $id, string $companyId)

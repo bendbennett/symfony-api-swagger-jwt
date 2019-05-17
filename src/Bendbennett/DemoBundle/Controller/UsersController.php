@@ -4,8 +4,8 @@ namespace Bendbennett\DemoBundle\Controller;
 
 use Bendbennett\DemoBundle\Document\User;
 use JMS\DiExtraBundle\Annotation as DI;
+use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
-use Swagger\Annotations as SWG;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
  * @Config\Route("/users")
- * @SWG\Info(title="Demo API", version="0.1")
+ * @OA\Info(title="Demo API", version="0.1")
  */
 class UsersController extends Controller
 {
@@ -40,15 +40,14 @@ class UsersController extends Controller
      * @Config\Method({"GET"})
      * @Config\Security("has_role('Administrator')")
      *
-     * @SWG\Get(
+     * @OA\Get(
      *     path="/users",
      *     summary="Get Users",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Users"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Response(response="200", description="Success")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Response(response="200", description="Success")
      * )
      */
     public function indexAction()
@@ -65,16 +64,15 @@ class UsersController extends Controller
      * @Config\Security("is_granted('view', user)")
      * @Config\ParamConverter("user", class="Bendbennett\DemoBundle\Document\User")
      *
-     * @SWG\Get(
+     * @OA\Get(
      *     path="/users/{userId}",
      *     summary="Get User by Id",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Users"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Parameter(name="userId", in="path", type="string", required=true),
-     *     @SWG\Response(response="200", description="Success.")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Success.")
      * )
      */
     public function showAction(User $user)
@@ -89,17 +87,16 @@ class UsersController extends Controller
      * @Config\Method({"GET"})
      * @Config\Security("has_role('Administrator')")
      *
-     * @SWG\Get(
+     * @OA\Get(
      *     path="/users/{key}/{value}",
      *     summary="Get User by Key-Value",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Users"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Parameter(name="key", in="path", type="string", required=true),
-     *     @SWG\Parameter(name="value", in="path", type="string", required=true),
-     *     @SWG\Response(response="200", description="All Users.")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Parameter(name="key", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Parameter(name="value", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="All Users.")
      * )
      */
     public function searchAction(string $key, string $value)
@@ -115,17 +112,16 @@ class UsersController extends Controller
      * @Config\Method({"POST"})
      * @Config\Security("is_granted('create', user)")
      *
-     * @SWG\Post(
+     * @OA\Post(
      *     path="/users",
      *     summary="Create User",
      *     description="Create user by deserializing json submitted in request body.",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Users"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Parameter(name="Body", in="body", type="string", required=true, @SWG\Schema(ref="#/definitions/User"),),
-     *     @SWG\Response(response="200", description="Success")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/User")),
+     *     @OA\Response(response="200", description="Success")
      * )
      */
     public function storeAction(Request $request)
@@ -150,18 +146,17 @@ class UsersController extends Controller
      * @Config\Route("/{id}")
      * @Config\Method({"PATCH"})
      *
-     * @SWG\Patch(
+     * @OA\Patch(
      *     path="/users/{userId}",
      *     summary="Update User",
      *     description="Update user by deserializing json submitted in request body.",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Users"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Parameter(name="userId", in="path", type="string", required=true),
-     *     @SWG\Parameter(name="Body", in="body", type="string", required=true, @SWG\Schema(ref="#/definitions/User"),),
-     *     @SWG\Response(response="200", description="Success")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/User")),
+     *     @OA\Response(response="200", description="Success")
      * )
      */
     public function editAction(Request $request, string $id)
@@ -186,17 +181,16 @@ class UsersController extends Controller
      * @Config\Route("/{id}")
      * @Config\Method({"DELETE"})
      *
-     * @SWG\Delete(
+     * @OA\Delete(
      *     path="/users/{userId}",
      *     summary="Delete User",
      *     description="Delete user by Id.",
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
      *     tags={"Users"},
-     *     @SWG\Parameter(name="Content-Type", in="header", type="string", default="application/json"),
-     *     @SWG\Parameter(name="Authorization", in="header", type="string", required=true, default="Bearer {jwt}"),
-     *     @SWG\Parameter(name="userId", in="path", type="string", required=true),
-     *     @SWG\Response(response="200", description="Success")
+     *     @OA\MediaType(mediaType="application/json"),
+     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
+     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response="200", description="Success")
      * )
      */
     public function deleteAction(string $id)
