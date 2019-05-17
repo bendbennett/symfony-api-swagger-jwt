@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new HarmBandstra\SwaggerUiBundle\HBSwaggerUiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

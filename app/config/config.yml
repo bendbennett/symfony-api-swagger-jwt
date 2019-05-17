@@ -57,3 +57,8 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
+
+hb_swagger_ui:
+  directory: "%kernel.root_dir%/../api/"
+  files:
+    - "/api/json"

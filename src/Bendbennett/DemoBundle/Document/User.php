@@ -6,13 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\Serializer\Annotation as JMS;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @MongoDB\Document(repositoryClass="Bendbennett\DemoBundle\Repository\UserRepository", collection="users")
- * @SWG\Definition(definition="User", required={"email"})
+ * @OA\Schema(schema="User", required={"email"})
  */
 class User implements UserInterface
 {
@@ -26,7 +26,7 @@ class User implements UserInterface
      * @MongoDB\Field(type="string")
      * @JMS\Type("string")
      * @Assert\Email()
-     * @SWG\Property(type="string", default="email@somewhere.com")
+     * @OA\Property(type="string", default="email@somewhere.com")
      */
     protected $email;
 
@@ -34,7 +34,7 @@ class User implements UserInterface
      * @MongoDB\Field(type="string")
      * @JMS\Type("string")
      * @JMS\SerializedName("firstName")
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     protected $firstName;
 
@@ -42,7 +42,7 @@ class User implements UserInterface
      * @MongoDB\Field(type="string")
      * @JMS\Type("string")
      * @JMS\SerializedName("lastName")
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     protected $lastName;
 
@@ -50,7 +50,7 @@ class User implements UserInterface
      * @MongoDB\Field(type="string")
      * @JMS\Type("string")
      * @JMS\Exclude
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     protected $password;
 
@@ -58,7 +58,6 @@ class User implements UserInterface
      * @MongoDB\EmbedMany(targetDocument="UserCompany")
      * @JMS\Type("ArrayCollection<Bendbennett\DemoBundle\Document\UserCompany>")
      * @JMS\SerializedName("userCompanies")
-     * @SWG\Property(type="array", items=@SWG\Schema(ref="#/definitions/UserCompany"))
      */
     private $userCompanies = array();
 

@@ -4,12 +4,12 @@ namespace Bendbennett\DemoBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use JMS\Serializer\Annotation as JMS;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @MongoDB\EmbeddedDocument
- * @SWG\Definition(definition="UserCompany")
+ * @OA\Schema(schema="UserCompany")
  */
 class UserCompany
 {
@@ -17,7 +17,7 @@ class UserCompany
      * @MongoDB\Field(type="string")
      * @JMS\Type("string")
      * @JMS\SerializedName("companyId")
-     * @SWG\Property(type="string")
+     * @OA\Property(type="string")
      */
     protected $companyId;
 
@@ -26,7 +26,7 @@ class UserCompany
      * @JMS\Type("array")
      * @var string[]
      * @Assert\All({@Assert\NotBlank, @Assert\Type("string")})
-     * @SWG\Property()
+     * @OA\Property()
      */
     protected $roles;
 

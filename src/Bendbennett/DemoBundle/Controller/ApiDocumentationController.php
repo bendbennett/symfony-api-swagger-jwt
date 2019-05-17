@@ -11,13 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class ApiDocumentationController extends Controller
 {
-    /**
-     * @Config\Route("")
-     */
-    public function indexAction()
-    {
-        return $this->render('api/index.html.twig');
-    }
 
     /**
      * A model definition in the Swagger json is required in order to render the "Model/Model Schema" within Swagger UI
