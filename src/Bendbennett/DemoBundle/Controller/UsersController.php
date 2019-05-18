@@ -44,10 +44,8 @@ class UsersController extends Controller
      *     path="/users",
      *     summary="Get Users",
      *     tags={"Users"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
-     *     @OA\Response(response="200", description="Success")
+     *     security={{"jwt":{}}},
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function indexAction()
@@ -68,11 +66,9 @@ class UsersController extends Controller
      *     path="/users/{userId}",
      *     summary="Get User by Id",
      *     tags={"Users"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     security={{"jwt":{}}},
      *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
-     *     @OA\Response(response="200", description="Success.")
+     *     @OA\Response(response="200", description="Success.", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function showAction(User $user)
@@ -91,12 +87,10 @@ class UsersController extends Controller
      *     path="/users/{key}/{value}",
      *     summary="Get User by Key-Value",
      *     tags={"Users"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     security={{"jwt":{}}},
      *     @OA\Parameter(name="key", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Parameter(name="value", in="path", required=true, @OA\Schema(type="string")),
-     *     @OA\Response(response="200", description="All Users.")
+     *     @OA\Response(response="200", description="All Users.", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function searchAction(string $key, string $value)
@@ -117,11 +111,9 @@ class UsersController extends Controller
      *     summary="Create User",
      *     description="Create user by deserializing json submitted in request body.",
      *     tags={"Users"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     security={{"jwt":{}}},
      *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/User")),
-     *     @OA\Response(response="200", description="Success")
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function storeAction(Request $request)
@@ -151,12 +143,10 @@ class UsersController extends Controller
      *     summary="Update User",
      *     description="Update user by deserializing json submitted in request body.",
      *     tags={"Users"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     security={{"jwt":{}}},
      *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/User")),
-     *     @OA\Response(response="200", description="Success")
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function editAction(Request $request, string $id)
@@ -186,11 +176,9 @@ class UsersController extends Controller
      *     summary="Delete User",
      *     description="Delete user by Id.",
      *     tags={"Users"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     security={{"jwt":{}}},
      *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
-     *     @OA\Response(response="200", description="Success")
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function deleteAction(string $id)

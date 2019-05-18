@@ -42,13 +42,11 @@ class UsersCompaniesController extends Controller
      *     summary="Update User Company",
      *     description="Update user company.",
      *     tags={"Users - Companies"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     security={{"jwt":{}}},
      *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Parameter(name="companyId", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/UserCompany")),
-     *     @OA\Response(response="200", description="Success")
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function editAction(Request $request, string $id, string $companyId)

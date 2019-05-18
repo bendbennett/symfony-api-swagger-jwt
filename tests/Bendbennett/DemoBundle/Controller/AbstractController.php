@@ -15,7 +15,7 @@ class AbstractController extends WebTestCase
      */
     protected $bootedTestKernel;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -26,7 +26,7 @@ class AbstractController extends WebTestCase
         $this->bootedTestKernel = $kernel;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 

@@ -51,10 +51,8 @@ class LoginController extends Controller
      *     summary="Login",
      *     description="Login and obtain JWT. The companyId parameter is optional but allows direct login to specific user company.",
      *     tags={"Login"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
      *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/Login")),
-     *     @OA\Response(response="200", description="Success")
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function login(Request $request) : JsonResponse
@@ -90,15 +88,19 @@ class LoginController extends Controller
      * This ensures that any user with a legitimate JWT which contains role(s) that include
      * "User" can access this endpoint (see role_hierarchy in security.yml)
      *
+     * @OA\SecurityScheme(
+     *     type="http",
+     *     scheme="bearer",
+     *     securityScheme="jwt"
+     * )
+     *
      * @OA\Put(
      *     path="/login",
      *     summary="Refresh JWT",
      *     description="Supply a valid JWT to obtain a new JWT.",
      *     tags={"Login"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
-     *     @OA\Response(response="200", description="Success")
+     *     security={{"jwt":{}}},
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function refreshJwt() : JsonResponse
@@ -129,12 +131,10 @@ class LoginController extends Controller
      *     summary="Switch Company",
      *     description="Supply companyId and valid JWT to generate a new JWT specific to the companyId supplied.",
      *     tags={"Login"},
-     *     @OA\MediaType(mediaType="application/json"),
-     *     @OA\Parameter(name="Content-Type", in="header", @OA\Schema(type="string", default="application/json")),
-     *     @OA\Parameter(name="Authorization", in="header", required=true, @OA\Schema(type="string", default="Bearer {jwt}")),
+     *     security={{"jwt":{}}},
      *     @OA\Parameter(name="companyId", in="path", required=true, @OA\Schema(type="string", default="xyz789")),
      *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/SwitchCompany")),
-     *     @OA\Response(response="200", description="Success")
+     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function switchCompany(string $companyId) : JsonResponse
