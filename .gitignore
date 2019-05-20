@@ -10,3 +10,4 @@
 /composer.phar
 *.pem
 /var
+.phpunit.result.cache
