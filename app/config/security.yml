@@ -30,6 +30,7 @@ security:
         api:
             pattern: ^/api
             http_basic: ~
+            logout_on_user_change: true
 
         ai:
             pattern: ^/(users|login)(?!token)

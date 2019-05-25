@@ -10,9 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Exception\ValidatorException;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Config\Route("/users")
+ * @Route("/users")
  * @OA\Info(title="Demo API", version="0.1")
  */
 class UsersController extends Controller
@@ -36,8 +37,7 @@ class UsersController extends Controller
     protected $validatorService;
 
     /**
-     * @Config\Route("")
-     * @Config\Method({"GET"})
+     * @Route("", methods={"GET"})
      * @Config\Security("has_role('Administrator')")
      *
      * @OA\Get(
@@ -57,8 +57,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @Config\Route("/{id}")
-     * @Config\Method({"GET"})
+     * @Route("/{id}", methods={"GET"})
      * @Config\Security("is_granted('view', user)")
      * @Config\ParamConverter("user", class="Bendbennett\DemoBundle\Document\User")
      *
@@ -79,8 +78,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @Config\Route("/{key}/{value}")
-     * @Config\Method({"GET"})
+     * @Route("/{key}/{value}", methods={"GET"})
      * @Config\Security("has_role('Administrator')")
      *
      * @OA\Get(
@@ -102,8 +100,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @Config\Route("")
-     * @Config\Method({"POST"})
+     * @Route("", methods={"POST"})
      * @Config\Security("is_granted('create', user)")
      *
      * @OA\Post(
@@ -135,8 +132,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @Config\Route("/{id}")
-     * @Config\Method({"PATCH"})
+     * @Route("/{id}", methods={"PATCH"})
      *
      * @OA\Patch(
      *     path="/users/{userId}",
@@ -168,8 +164,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @Config\Route("/{id}")
-     * @Config\Method({"DELETE"})
+     * @Route("/{id}", methods={"DELETE"})
      *
      * @OA\Delete(
      *     path="/users/{userId}",

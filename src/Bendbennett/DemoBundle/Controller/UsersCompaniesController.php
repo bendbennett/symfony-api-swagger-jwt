@@ -3,15 +3,15 @@
 namespace Bendbennett\DemoBundle\Controller;
 
 use JMS\DiExtraBundle\Annotation as DI;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Config\Route("/users/{id}/companies/{companyId}")
+ * @Route("/users/{id}/companies/{companyId}")
  */
 class UsersCompaniesController extends Controller
 {
@@ -34,8 +34,7 @@ class UsersCompaniesController extends Controller
     protected $validatorService;
 
     /**
-     * @Config\Route("")
-     * @Config\Method({"PATCH"})
+     * @Route("", methods={"PATCH"})
      *
      * @OA\Patch(
      *     path="/users/{userId}/companies/{companyId}",

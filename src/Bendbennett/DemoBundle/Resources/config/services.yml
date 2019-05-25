@@ -1,4 +1,5 @@
 services:
+
     # listener
     Bendbennett\DemoBundle\Listener\DoctrineMongoListener:
         autowire: true
@@ -16,6 +17,7 @@ services:
             - "@doctrine_mongodb.odm.default_configuration"
             - "@doctrine_mongodb.odm.event_manager"
             - "@security.password_encoder"
+        public: true
 
     # security
     Bendbennett\DemoBundle\Security\JwtAuthenticator:
@@ -31,9 +33,13 @@ services:
     # service
     Bendbennett\DemoBundle\Service\ActiveJwtService:
         autowire: true
+        public: true
+
+    Bendbennett\DemoBundle\Service\ActiveJwtServiceInterface: '@Bendbennett\DemoBundle\Service\ActiveJwtService'
 
     Bendbennett\DemoBundle\Service\AuthenticationService:
         autowire: true
+        public: true
 
     Bendbennett\DemoBundle\Service\JwtService:
         autowire: true
@@ -41,12 +47,19 @@ services:
             $tokenTimeToLive: '%jwt_token_ttl%'
             $registeredClaims: '%jwt_registered_claims%'
             $customClaims: '%jwt_custom_claims%'
+        public: true
 
     Bendbennett\DemoBundle\Service\RequestService:
         autowire: true
 
+    Bendbennett\DemoBundle\Service\RequestServiceInterface: '@Bendbennett\DemoBundle\Service\RequestService'
+
     Bendbennett\DemoBundle\Service\SerializerService:
         autowire: true
+        public: true
+
+    Bendbennett\DemoBundle\Service\SerializerServiceInterface: '@Bendbennett\DemoBundle\Service\SerializerService'
 
     Bendbennett\DemoBundle\Service\ValidatorService:
         autowire: true
+        public: true

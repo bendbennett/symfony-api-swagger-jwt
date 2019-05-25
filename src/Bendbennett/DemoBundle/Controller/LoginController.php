@@ -10,9 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Config\Route("/login")
+ * @Route("/login")
  */
 class LoginController extends Controller
 {
@@ -35,8 +36,7 @@ class LoginController extends Controller
     protected $activeJwtService;
 
     /**
-     * @Config\Route("")
-     * @Config\Method({"POST"})
+     * @Route("", methods={"POST"})
      *
      * @OA\Schema(
      *     schema="Login",
@@ -82,8 +82,7 @@ class LoginController extends Controller
     }
 
     /**
-     * @Config\Route("")
-     * @Config\Method({"PUT"})
+     * @Route("", methods={"PUT"})
      * @Config\Security("has_role('User')")
      * This ensures that any user with a legitimate JWT which contains role(s) that include
      * "User" can access this endpoint (see role_hierarchy in security.yml)
@@ -115,8 +114,7 @@ class LoginController extends Controller
     }
 
     /**
-     * @Config\Route("/company/{companyId}")
-     * @Config\Method({"POST"})
+     * @Route("/company/{companyId}", methods={"POST"})
      * @Config\Security("has_role('User')")
      * This ensures that any user with a legitimate JWT which contains role(s) that include
      * "User" can access this endpoint (see role_hierarchy in security.yml)
