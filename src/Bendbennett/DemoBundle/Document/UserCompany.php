@@ -14,6 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UserCompany
 {
     /**
+     * @MongoDB\Id
+     * @JMS\Type("string")
+     */
+    protected $id;
+
+    /**
      * @MongoDB\Field(type="string")
      * @JMS\Type("string")
      * @JMS\SerializedName("companyId")
