@@ -416,7 +416,6 @@ class UsersControllerTest extends AbstractController
     /**
      * @test
      * @group UsersController::deleteAction
-     * @expectedException \Doctrine\ODM\MongoDB\DocumentNotFoundException
      */
     public function itShouldReturn200ForDeleteAction()
     {
@@ -439,6 +438,9 @@ class UsersControllerTest extends AbstractController
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $userManager = $this->bootedTestKernel->getContainer()->get('Bendbennett\DemoBundle\Manager\UserManager');
+        
+        $this->expectException(\Doctrine\ODM\MongoDB\DocumentNotFoundException::class);
+
         $userManager->getUser($userOne->getId());
     }
 }
