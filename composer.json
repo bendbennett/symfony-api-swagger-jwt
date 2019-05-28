@@ -36,7 +36,6 @@
         "harmbandstra/swagger-ui-bundle": "^3.1"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.1",
         "symfony/phpunit-bridge": "^4.2",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "phpunit/phpunit": "^8.1"
