@@ -1,4 +1,22 @@
 services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Bendbennett\DemoBundle\:
+        resource: '../../../../../src/Bendbennett/DemoBundle/*'
+
+    # controller
+    Bendbennett\DemoBundle\Controller\:
+        resource: '../../../../../src/Bendbennett/DemoBundle/Controller'
+        public: true
+
+    Bendbennett\DemoBundle\Controller\ApiDocumentationController:
+        arguments:
+            - '%kernel.project_dir%'
+        public: true
 
     # listener
     Bendbennett\DemoBundle\Listener\DoctrineMongoListener:

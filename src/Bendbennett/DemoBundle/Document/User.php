@@ -4,7 +4,6 @@ namespace Bendbennett\DemoBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use JMS\DiExtraBundle\Annotation as DI;
 use JMS\Serializer\Annotation as JMS;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Security\Core\User\UserInterface;

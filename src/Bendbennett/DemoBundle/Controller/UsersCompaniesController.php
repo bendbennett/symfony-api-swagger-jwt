@@ -2,9 +2,10 @@
 
 namespace Bendbennett\DemoBundle\Controller;
 
-use JMS\DiExtraBundle\Annotation as DI;
+use Bendbennett\DemoBundle\Manager\UserManager;
+use Bendbennett\DemoBundle\Service\SerializerServiceInterface;
+use Bendbennett\DemoBundle\Service\ValidatorServiceInterface;
 use OpenApi\Annotations as OA;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,25 +14,33 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/users/{id}/companies/{companyId}")
  */
-class UsersCompaniesController extends Controller
+class UsersCompaniesController
 {
     /**
      * @var \Bendbennett\DemoBundle\Manager\UserManager
-     * @DI\Inject("Bendbennett\DemoBundle\Manager\UserManager")
      */
     protected $userManager;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\SerializerServiceInterface
-     * @DI\Inject("Bendbennett\DemoBundle\Service\SerializerService")
      */
     protected $serializerService;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\ValidatorServiceInterface
-     * @DI\Inject("Bendbennett\DemoBundle\Service\ValidatorService")
      */
     protected $validatorService;
+
+    public function __construct(
+        UserManager $userManager,
+        SerializerServiceInterface $serializerService,
+        ValidatorServiceInterface $validatorService
+    )
+    {
+        $this->userManager = $userManager;
+        $this->serializerService = $serializerService;
+        $this->validatorService = $validatorService;
+    }
 
     /**
      * @Route("", methods={"PATCH"})

@@ -3,37 +3,53 @@
 namespace Bendbennett\DemoBundle\Controller;
 
 use Bendbennett\DemoBundle\Document\UserCompany;
-use JMS\DiExtraBundle\Annotation as DI;
+use Bendbennett\DemoBundle\Service\AuthenticationServiceInterface;
+use Bendbennett\DemoBundle\Service\JwtServiceInterface;
+use Bendbennett\DemoBundle\Service\ActiveJwtServiceInterface;
 use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/login")
  */
-class LoginController extends Controller
+class LoginController
 {
     /**
      * @var \Bendbennett\DemoBundle\Service\AuthenticationServiceInterface
-     * @DI\Inject("Bendbennett\DemoBundle\Service\AuthenticationService")
      */
     protected $authenticationService;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\JwtServiceInterface
-     * @DI\Inject("Bendbennett\DemoBundle\Service\JwtService")
      */
     protected $jwtService;
 
     /**
      * @var \Bendbennett\DemoBundle\Service\ActiveJwtServiceInterface
-     * @DI\Inject("Bendbennett\DemoBundle\Service\ActiveJwtService")
      */
     protected $activeJwtService;
+
+    /**
+     * @var \Symfony\Component\Security\Core\Security
+     */
+    protected $security;
+
+    public function __construct(
+        AuthenticationServiceInterface $authenticationService,
+        JwtServiceInterface $jwtService,
+        ActiveJwtServiceInterface $activeJwtService,
+        Security $security)
+    {
+        $this->authenticationService = $authenticationService;
+        $this->jwtService = $jwtService;
+        $this->activeJwtService = $activeJwtService;
+        $this->security = $security;
+    }
 
     /**
      * @Route("", methods={"POST"})
@@ -141,7 +157,7 @@ class LoginController extends Controller
             throw new InvalidArgumentException('companyId is empty.');
         }
 
-        $user = $this->getUser();
+        $user = $this->security->getUser();
         $requestedUserCompany = $user->getUserCompanyById($companyId);
 
         if (!$requestedUserCompany instanceof UserCompany) {
