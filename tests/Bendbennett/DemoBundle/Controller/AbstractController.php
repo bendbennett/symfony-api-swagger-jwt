@@ -6,6 +6,7 @@ use Bendbennett\DemoBundle\Document\User;
 use Bendbennett\DemoBundle\Document\UserCompany;
 use Doctrine\Common\DataFixtures\Purger\MongoDBPurger;
 use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AbstractController extends WebTestCase
@@ -72,7 +73,7 @@ class AbstractController extends WebTestCase
         return json_decode(base64_decode($jwtClaims));
     }
 
-    protected function login(Client $client, string $email, string $password)
+    protected function login(KernelBrowser $client, string $email, string $password)
     {
         $client->request(
             'POST',
