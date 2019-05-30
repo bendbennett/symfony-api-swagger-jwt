@@ -1,5 +1,4 @@
 services:
-    # default configuration for services in *this* file
     _defaults:
         autowire: true
         autoconfigure: true
@@ -12,6 +11,7 @@ services:
     Bendbennett\DemoBundle\Controller\:
         resource: '../../../../../src/Bendbennett/DemoBundle/Controller'
         public: true
+        tags: ['controller.service_arguments']
 
     Bendbennett\DemoBundle\Controller\ApiDocumentationController:
         arguments:
@@ -20,7 +20,6 @@ services:
 
     # listener
     Bendbennett\DemoBundle\Listener\DoctrineMongoListener:
-        autowire: true
         tags:
             -  { name: doctrine_mongodb.odm.event_listener, event: postLoad }
 
@@ -38,46 +37,26 @@ services:
         public: true
 
     # security
-    Bendbennett\DemoBundle\Security\JwtAuthenticator:
-        autowire: true
-
     Bendbennett\DemoBundle\Security\UserVoter:
-        autowire: true
         tags:
             - { name: security.voter }
-        # small performance boost
-        public: false
 
     # service
     Bendbennett\DemoBundle\Service\ActiveJwtService:
-        autowire: true
         public: true
 
-    Bendbennett\DemoBundle\Service\ActiveJwtServiceInterface: '@Bendbennett\DemoBundle\Service\ActiveJwtService'
-
     Bendbennett\DemoBundle\Service\AuthenticationService:
-        autowire: true
         public: true
 
     Bendbennett\DemoBundle\Service\JwtService:
-        autowire: true
         arguments:
             $tokenTimeToLive: '%jwt_token_ttl%'
             $registeredClaims: '%jwt_registered_claims%'
             $customClaims: '%jwt_custom_claims%'
         public: true
 
-    Bendbennett\DemoBundle\Service\RequestService:
-        autowire: true
-
-    Bendbennett\DemoBundle\Service\RequestServiceInterface: '@Bendbennett\DemoBundle\Service\RequestService'
-
     Bendbennett\DemoBundle\Service\SerializerService:
-        autowire: true
         public: true
 
-    Bendbennett\DemoBundle\Service\SerializerServiceInterface: '@Bendbennett\DemoBundle\Service\SerializerService'
-
     Bendbennett\DemoBundle\Service\ValidatorService:
-        autowire: true
         public: true
