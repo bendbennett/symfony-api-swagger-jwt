@@ -19,7 +19,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
-            // new HarmBandstra\SwaggerUiBundle\HBSwaggerUiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
