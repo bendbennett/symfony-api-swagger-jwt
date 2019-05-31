@@ -1,0 +1,98 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    # env(MONGODB_URL): ''
+    # env(MONGODB_DB): ''
+
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+    mongodb_server:           '%env(SY_MONGODB_SERVER)%'
+    env(SY_MONGODB_SERVER):   mongodb://mongo:27017
+    mongodb_database:         demo
+
+    jwt_private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
+    jwt_public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+    jwt_token_ttl: 86400
+    jwt_registered_claims:
+        - iss
+        - sub
+        - exp
+        - iat
+    jwt_custom_claims:
+        - roles
+        - companyId
+
+    swagger_docs_password: $2y$12$1TVdGigAZ5hM.z5oirk0BeswDH6mj5Joui0I2qsl3DPbF6JHxoNNS
+
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Bendbennett\DemoBundle\:
+        resource: '../src/Bendbennett/DemoBundle/*'
+        exclude: '../src/Bendbennett/DemoBundle/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    Bendbennett\DemoBundle\Controller\:
+        resource: '../src/Bendbennett/DemoBundle/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    Bendbennett\DemoBundle\Controller\ApiDocumentationController:
+        arguments:
+            - '%kernel.project_dir%'
+        public: true
+
+    # listener
+    Bendbennett\DemoBundle\Listener\DoctrineMongoListener:
+        tags:
+            -  { name: doctrine_mongodb.odm.event_listener, event: postLoad }
+
+    Bendbennett\DemoBundle\Listener\ExceptionListener:
+        tags:
+            -  { name: kernel.event_listener, event: kernel.exception }
+
+    # manager
+    Bendbennett\DemoBundle\Manager\UserManager:
+        arguments:
+            - "@doctrine_mongodb.odm.default_connection"
+            - "@doctrine_mongodb.odm.default_configuration"
+            - "@doctrine_mongodb.odm.event_manager"
+            - "@security.password_encoder"
+        public: true
+
+    # security
+    Bendbennett\DemoBundle\Security\UserVoter:
+        tags:
+            - { name: security.voter }
+
+    # service
+    Bendbennett\DemoBundle\Service\ActiveJwtService:
+        public: true
+
+    Bendbennett\DemoBundle\Service\AuthenticationService:
+        public: true
+
+    Bendbennett\DemoBundle\Service\JwtService:
+        arguments:
+            $tokenTimeToLive: '%jwt_token_ttl%'
+            $registeredClaims: '%jwt_registered_claims%'
+            $customClaims: '%jwt_custom_claims%'
+        public: true
+
+    Bendbennett\DemoBundle\Service\SerializerService:
+        public: true
+
+    Bendbennett\DemoBundle\Service\ValidatorService:
+        public: true

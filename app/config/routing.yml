@@ -6,6 +6,6 @@ bendbennett_demo:
 logout:
     path: /logout
 
-_swagger-ui:
-    resource: '@HBSwaggerUiBundle/Resources/config/routing.yml'
-    prefix: /api
+# _swagger-ui:
+#     resource: '@HBSwaggerUiBundle/Resources/config/routing.yml'
+#     prefix: /api
