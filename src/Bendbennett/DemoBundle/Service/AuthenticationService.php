@@ -6,7 +6,7 @@ use Bendbennett\DemoBundle\Document\User;
 use Bendbennett\DemoBundle\Manager\UserManager;
 use Doctrine\ODM\MongoDB\DocumentNotFoundException;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class AuthenticationService implements AuthenticationServiceInterface
 {
@@ -51,7 +51,7 @@ class AuthenticationService implements AuthenticationServiceInterface
     private function validatePassword(User $user, string $password) : bool
     {
         if (!$this->userManager->isPasswordValid($user, $password)) {
-            throw new BadCredentialsException('Password is invalid.');
+            throw new UnauthorizedHttpException('Password is invalid.');
         }
 
         return true;

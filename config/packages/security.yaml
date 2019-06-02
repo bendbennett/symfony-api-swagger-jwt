@@ -1,25 +1,11 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    # @link http://symfony.com/doc/current/bundles/DoctrineMongoDBBundle/index.html#securitybundle-integration
     providers:
-        in_memory: { memory: ~ }
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: true
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        in_memory:
+            memory:
+                users:
+                    swagger:
+                        password: '%swagger_docs_password%'
 
     encoders:
         Bendbennett\DemoBundle\Document\User:
@@ -28,3 +14,33 @@ security:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
             cost: 12
+
+    firewalls:
+        # disables authentication for assets and the profiler
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: /login$
+            security: false
+            methods: [POST]
+
+        api:
+            pattern: ^/api
+            http_basic: ~
+            logout_on_user_change: true
+
+        ai:
+            pattern: ^/(users|login)(?!token)
+            stateless: true
+            guard:
+                authenticators:
+                    - Bendbennett\DemoBundle\Security\JwtAuthenticator
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    role_hierarchy:
+        Administrator: Director
+        Director: User

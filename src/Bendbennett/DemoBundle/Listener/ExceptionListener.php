@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class ExceptionListener
 {
@@ -23,6 +24,7 @@ class ExceptionListener
         DocumentNotFoundException::class => Response::HTTP_NOT_FOUND,
         InvalidArgumentException::class => Response::HTTP_BAD_REQUEST,
         NotFoundHttpException::class => Response::HTTP_NOT_FOUND,
+        UnauthorizedHttpException::class => Response::HTTP_UNAUTHORIZED
     ];
 
     public function onKernelException(GetResponseForExceptionEvent $event)
