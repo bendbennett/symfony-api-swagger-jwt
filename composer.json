@@ -4,16 +4,13 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/"
-        },
-        "classmap": [
-            "app/AppKernel.php",
-            "app/AppCache.php"
-        ]
+            "App\\": "src/",
+            "Bendbennett\\DemoBundle\\": "src/Bendbennett/DemoBundle/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\Bendbennett\\DemoBundle\\": "tests/"
         }
     },
     "provide": { "ext-mongo": "1.6.12" },
@@ -40,7 +37,8 @@
         "symfony/expression-language": "^4.3",
         "symfony/browser-kit": "^4.3",
         "symfony/form": "^4.3",
-        "symfony/templating": "^4.3"
+        "symfony/templating": "^4.3",
+        "symfony-bundles/json-request-bundle": "^2.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^4.3",

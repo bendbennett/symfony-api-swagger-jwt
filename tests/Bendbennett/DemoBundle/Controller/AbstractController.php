@@ -2,6 +2,7 @@
 
 namespace Tests\Bendbennett\DemoBundle\Controller;
 
+use App\Kernel;
 use Bendbennett\DemoBundle\Document\User;
 use Bendbennett\DemoBundle\Document\UserCompany;
 use Doctrine\Common\DataFixtures\Purger\MongoDBPurger;
@@ -21,7 +22,7 @@ class AbstractController extends WebTestCase
         parent::setUp();
 
         /* @link http://blog.sznapka.pl/fully-isolated-tests-in-symfony2/ */
-        $kernel = new \AppKernel("test", true);
+        $kernel = new Kernel("test", true);
         $kernel->boot();
 
         $this->bootedTestKernel = $kernel;

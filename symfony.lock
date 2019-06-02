@@ -280,6 +280,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony-bundles/json-request-bundle": {
+        "version": "v2.0.1"
+    },
     "symfony/browser-kit": {
         "version": "v4.3.0"
     },
