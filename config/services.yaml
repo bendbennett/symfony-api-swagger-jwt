@@ -8,6 +8,7 @@ parameters:
     # env(MONGODB_DB): ''
 
     secret: ThisTokenIsNotSoSecretChangeIt
+    locale: en
 
     mongodb_server:           '%env(SY_MONGODB_SERVER)%'
     env(SY_MONGODB_SERVER):   mongodb://mongo:27017
