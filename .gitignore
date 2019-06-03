@@ -1,18 +1,5 @@
-/web/bundles/
-/web/css/
-/web/images/
-/web/js/
-/app/bootstrap.php.cache
-/app/phpunit.xml
-/build/
-/vendor/
-/bin/
-/composer.phar
-*.pem
-/var
-.phpunit.result.cache
-
 ###> symfony/framework-bundle ###
+/bin/
 /.env.local
 /.env.local.php
 /.env.*.local
