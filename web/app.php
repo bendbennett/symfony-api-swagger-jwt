@@ -3,11 +3,12 @@
 use App\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 
+// die(var_dump($_SERVER['APP_ENV']));
+
 /**
  * @var Composer\Autoload\ClassLoader
  */
-$loader = require __DIR__.'/../app/autoload.php';
-// include_once __DIR__.'/../app/bootstrap.php.cache';
+require dirname(__DIR__).'/vendor/autoload.php';
 
 $kernel = new Kernel('prod', false);
 Request::setTrustedProxies(['192.0.0.1', '10.0.0.0/8'], Request::HEADER_X_FORWARDED_ALL);
