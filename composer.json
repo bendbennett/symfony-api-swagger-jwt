@@ -45,7 +45,8 @@
         "phpunit/phpunit": "^8.1",
         "symfony/debug-bundle": "^4.3",
         "symfony/web-profiler-bundle": "^4.3",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "harmbandstra/swagger-ui-bundle": "^4.1"
     },
     "scripts": {
         "auto-scripts": {
@@ -53,9 +54,11 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
+            "HarmBandstra\\SwaggerUiBundle\\Composer\\ScriptHandler::linkAssets",
             "@auto-scripts"
         ],
         "post-update-cmd": [
+            "HarmBandstra\\SwaggerUiBundle\\Composer\\ScriptHandler::linkAssets",
             "@auto-scripts"
         ]
     },

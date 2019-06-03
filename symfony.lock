@@ -113,6 +113,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "harmbandstra/swagger-ui-bundle": {
+        "version": "4.1.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -279,6 +282,9 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "swagger-api/swagger-ui": {
+        "version": "v3.22.2"
     },
     "symfony-bundles/json-request-bundle": {
         "version": "v2.0.1"
