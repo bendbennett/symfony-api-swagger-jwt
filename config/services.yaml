@@ -4,23 +4,19 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    # env(MONGODB_URL): ''
-    # env(MONGODB_DB): ''
-
     secret: ThisTokenIsNotSoSecretChangeIt
-    locale: en
 
-    mongodb_server:           '%env(SY_MONGODB_SERVER)%'
-    env(SY_MONGODB_SERVER):   mongodb://mongo:27017
-    mongodb_database:         demo
+    locale: en
 
     mongodb_url:            '%env(MONGODB_URL)%'
     env(MONGODB_URL):       mongodb://mongo:27017
     mongodb_db:             '%env(MONGODB_DB)%'
     env(MONGODB_DB):        demo
 
-    jwt_private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
-    jwt_public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+    env(JWT_SECRET_KEY): '%kernel.project_dir%/config/jwt/private.pem'
+    env(JWT_PUBLIC_KEY): '%kernel.project_dir%/config/jwt/public.pem'
+    # public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
+    # pass_phrase: '%env(JWT_PASSPHRASE)%'
     jwt_token_ttl: 86400
     jwt_registered_claims:
         - iss
@@ -32,11 +28,6 @@ parameters:
         - companyId
 
     swagger_docs_password: $2y$12$1TVdGigAZ5hM.z5oirk0BeswDH6mj5Joui0I2qsl3DPbF6JHxoNNS
-
-    env(JWT_SECRET_KEY): '%kernel.project_dir%/app/var/jwt/private.pem'
-    env(JWT_PUBLIC_KEY): '%kernel.project_dir%/app/var/jwt/public.pem'
-    # public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
-    # pass_phrase: '%env(JWT_PASSPHRASE)%'
 
 services:
     # 3rd party
