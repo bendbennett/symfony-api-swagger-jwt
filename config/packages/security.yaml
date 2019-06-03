@@ -8,7 +8,7 @@ security:
                         password: '%swagger_docs_password%'
 
     encoders:
-        Bendbennett\DemoBundle\Document\User:
+        App\Document\User:
             algorithm: bcrypt
             cost: 12
         Symfony\Component\Security\Core\User\User:
@@ -36,7 +36,7 @@ security:
             stateless: true
             guard:
                 authenticators:
-                    - Bendbennett\DemoBundle\Security\JwtAuthenticator
+                    - App\Security\JwtAuthenticator
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -64,35 +64,35 @@ services:
         
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    Bendbennett\DemoBundle\:
-        resource: '../src/Bendbennett/DemoBundle/*'
-        exclude: '../src/Bendbennett/DemoBundle/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Bendbennett\DemoBundle\Controller\:
-        resource: '../src/Bendbennett/DemoBundle/Controller'
+    App\Controller\:
+        resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    Bendbennett\DemoBundle\Controller\ApiDocumentationController:
+    App\Controller\ApiDocumentationController:
         arguments:
             - '%kernel.project_dir%'
         public: true
 
     # listener
-    Bendbennett\DemoBundle\Listener\DoctrineMongoListener:
+    App\Listener\DoctrineMongoListener:
         tags:
             -  { name: doctrine_mongodb.odm.event_listener, event: postLoad }
 
-    Bendbennett\DemoBundle\Listener\ExceptionListener:
+    App\Listener\ExceptionListener:
         tags:
             -  { name: kernel.event_listener, event: kernel.exception }
 
     # manager
-    Bendbennett\DemoBundle\Manager\UserManager:
+    App\Manager\UserManager:
         arguments:
             - "@doctrine_mongodb.odm.default_connection"
             - "@doctrine_mongodb.odm.default_configuration"
@@ -101,26 +101,26 @@ services:
         public: true
 
     # security
-    Bendbennett\DemoBundle\Security\UserVoter:
+    App\Security\UserVoter:
         tags:
             - { name: security.voter }
 
     # service
-    Bendbennett\DemoBundle\Service\ActiveJwtService:
+    App\Service\ActiveJwtService:
         public: true
 
-    Bendbennett\DemoBundle\Service\AuthenticationService:
+    App\Service\AuthenticationService:
         public: true
 
-    Bendbennett\DemoBundle\Service\JwtService:
+    App\Service\JwtService:
         arguments:
             $tokenTimeToLive: '%jwt_token_ttl%'
             $registeredClaims: '%jwt_registered_claims%'
             $customClaims: '%jwt_custom_claims%'
         public: true
 
-    Bendbennett\DemoBundle\Service\SerializerService:
+    App\Service\SerializerService:
         public: true
 
-    Bendbennett\DemoBundle\Service\ValidatorService:
+    App\Service\ValidatorService:
         public: true

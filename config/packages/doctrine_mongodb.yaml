@@ -13,6 +13,6 @@ doctrine_mongodb:
                 App:
                     is_bundle: false
                     type: annotation
-                    dir: '%kernel.project_dir%/src/Bendbennett/DemoBundle/Document'
-                    prefix: 'Bendbennett\DemoBundle\Document'
-                    alias: BendbennettDemoBundle
+                    dir: '%kernel.project_dir%/src/Document'
+                    prefix: 'App\Document'
+                    alias: App

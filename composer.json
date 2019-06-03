@@ -4,13 +4,12 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "Bendbennett\\DemoBundle\\": "src/Bendbennett/DemoBundle/"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Bendbennett\\DemoBundle\\": "tests/"
+            "App\\Tests\\": "tests/"
         }
     },
     "provide": { "ext-mongo": "1.6.12" },
