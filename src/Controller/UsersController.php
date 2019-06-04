@@ -46,7 +46,7 @@ class UsersController
 
     /**
      * @Route("", methods={"GET"})
-     * @Config\Security("has_role('Administrator')")
+     * @Config\Security("is_granted('ROLE_ADMIN')")
      *
      * @OA\Get(
      *     path="/users",
@@ -87,7 +87,7 @@ class UsersController
 
     /**
      * @Route("/{key}/{value}", methods={"GET"})
-     * @Config\Security("has_role('Administrator')")
+     * @Config\Security("is_granted('ROLE_ADMIN')")
      *
      * @OA\Get(
      *     path="/users/{key}/{value}",
@@ -141,7 +141,7 @@ class UsersController
 
     /**
      * @Route("/{id}", methods={"PATCH"})
-     *
+     * @Config\Security("is_granted('ROLE_DIRECTOR')")
      * @OA\Patch(
      *     path="/users/{userId}",
      *     summary="Update User",
@@ -173,6 +173,7 @@ class UsersController
 
     /**
      * @Route("/{id}", methods={"DELETE"})
+     * @Config\Security("is_granted('ROLE_ADMIN')")
      *
      * @OA\Delete(
      *     path="/users/{userId}",

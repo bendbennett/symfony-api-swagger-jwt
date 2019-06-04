@@ -99,9 +99,9 @@ class LoginController
 
     /**
      * @Route("", methods={"PUT"})
-     * @Config\Security("has_role('User')")
+     * @Config\Security("is_granted('ROLE_USER')")
      * This ensures that any user with a legitimate JWT which contains role(s) that include
-     * "User" can access this endpoint (see role_hierarchy in security.yml)
+     * "ROLE_USER" can access this endpoint (see role_hierarchy in security.yml)
      *
      * @OA\SecurityScheme(
      *     type="http",
@@ -131,9 +131,9 @@ class LoginController
 
     /**
      * @Route("/company/{companyId}", methods={"POST"})
-     * @Config\Security("has_role('User')")
+     * @Config\Security("is_granted('ROLE_USER')")
      * This ensures that any user with a legitimate JWT which contains role(s) that include
-     * "User" can access this endpoint (see role_hierarchy in security.yml)
+     * "ROLE_USER" can access this endpoint (see role_hierarchy in security.yml)
      *
      * @OA\Schema(
      *     schema="SwitchCompany",

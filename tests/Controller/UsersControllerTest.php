@@ -22,8 +22,8 @@ class UsersControllerTest extends AbstractController
     {
         $userOnePassword = 'passwordOne';
 
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['Administrator']);
-        $this->loadUser('userTwo@companyTwo.com', 'passwordTwo', 'xyz789', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_ADMIN']);
+        $this->loadUser('userTwo@companyTwo.com', 'passwordTwo', 'xyz789', ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), $userOnePassword);
@@ -51,7 +51,7 @@ class UsersControllerTest extends AbstractController
     public function itShouldReturn403WhenJwtRoleIsNotAdministrator()
     {
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), $userOnePassword);
@@ -76,7 +76,7 @@ class UsersControllerTest extends AbstractController
     public function itShouldReturn200AndUserWhenLoggedInUserIsAdministrator()
     {
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['Administrator']);
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_ADMIN']);
 
         $userTwoEmail = 'userTwo@companyTwo.com';
         $userTwoCompanyOneId = 'xyz789';
@@ -110,7 +110,7 @@ class UsersControllerTest extends AbstractController
     {
         $userOneEmail = 'userOne@companyOne.com';
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser($userOneEmail, $userOnePassword, 'abc123', ['Director']);
+        $userOne = $this->loadUser($userOneEmail, $userOnePassword, 'abc123', ['ROLE_DIRECTOR']);
 
         $userTwoEmail = 'userTwo@companyOne.com';
         $userTwoCompanyOneId = 'abc123';
@@ -173,8 +173,8 @@ class UsersControllerTest extends AbstractController
      */
     public function itShouldReturn403WhenLoggedInUserIsDirectorInDifferentCompany()
     {
-        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['Administrator']);
-        $userTwo = $this->loadUser('userTwo@companyTwo.com', 'passwordTwo', 'def789', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['ROLE_ADMIN']);
+        $userTwo = $this->loadUser('userTwo@companyTwo.com', 'passwordTwo', 'def789', ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userTwo->getEmail(), 'passwordTwo');
@@ -199,7 +199,7 @@ class UsersControllerTest extends AbstractController
     public function itShouldReturn200AndUserWhenLoggedInUserIsAdministratorForSearch()
     {
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['Administrator']);
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_ADMIN']);
 
         $userTwoEmail = 'userTwo@companyTwo.com';
         $userTwoCompanyOneId = 'xyz789';
@@ -231,8 +231,8 @@ class UsersControllerTest extends AbstractController
      */
     public function itShouldReturn403WhenLoggedInUserIsNotAdministratorForSearch()
     {
-        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['Administrator']);
-        $userTwo = $this->loadUser('userTwo@companyTwo.com', 'passwordTwo', 'def789', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['ROLE_ADMIN']);
+        $userTwo = $this->loadUser('userTwo@companyTwo.com', 'passwordTwo', 'def789', ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userTwo->getEmail(), 'passwordTwo');
@@ -257,7 +257,7 @@ class UsersControllerTest extends AbstractController
     public function itShouldReturn200AndUserWhenLoggedInUserIsAdministratorForStore()
     {
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['Administrator']);
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_ADMIN']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), $userOnePassword);
@@ -279,7 +279,7 @@ class UsersControllerTest extends AbstractController
                 'userCompanies' => [
                     [
                         'companyId' => $userTwoCompanyOneId,
-                        'roles' => ['Director']
+                        'roles' => ['ROLE_DIRECTOR']
                     ]
                 ]
             ])
@@ -299,7 +299,7 @@ class UsersControllerTest extends AbstractController
     public function itShouldReturn200AndUserWhenLoggedInUserIsDirectorInSameCompanyForStoreAction()
     {
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), $userOnePassword);
@@ -321,7 +321,7 @@ class UsersControllerTest extends AbstractController
                 'userCompanies' => [
                     [
                         'companyId' => $userTwoCompanyOneId,
-                        'roles' => ['Director']
+                        'roles' => ['ROLE_DIRECTOR']
                     ]
                 ]
             ])
@@ -341,7 +341,7 @@ class UsersControllerTest extends AbstractController
     public function itShouldReturn403WhenLoggedInUserIsDirectorInDifferentCompanyForStoreAction()
     {
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), $userOnePassword);
@@ -363,7 +363,7 @@ class UsersControllerTest extends AbstractController
                 'userCompanies' => [
                     [
                         'companyId' => $userTwoCompanyOneId,
-                        'roles' => ['Director']
+                        'roles' => ['ROLE_DIRECTOR']
                     ]
                 ]
             ])
@@ -378,7 +378,7 @@ class UsersControllerTest extends AbstractController
      */
     public function itShouldReturn200AndUserForEditAction()
     {
-        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), 'passwordOne');
@@ -419,7 +419,7 @@ class UsersControllerTest extends AbstractController
      */
     public function itShouldReturn200ForDeleteAction()
     {
-        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['ROLE_ADMIN']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), 'passwordOne');

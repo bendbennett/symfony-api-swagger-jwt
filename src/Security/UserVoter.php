@@ -14,8 +14,8 @@ class UserVoter extends Voter
 {
     const VIEW = 'view';
     const CREATE = 'create';
-    const GLOBAL_ROLES = ['Administrator'];
-    const ALLOWED_ROLES = ['Director'];
+    const GLOBAL_ROLES = ['ROLE_ADMIN'];
+    const ALLOWED_ROLES = ['ROLE_DIRECTOR'];
 
     /**
      * @var RequestStack

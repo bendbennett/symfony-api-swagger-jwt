@@ -6,6 +6,7 @@ use App\Manager\UserManager;
 use App\Service\SerializerServiceInterface;
 use App\Service\ValidatorServiceInterface;
 use OpenApi\Annotations as OA;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +45,7 @@ class UsersCompaniesController
 
     /**
      * @Route("", methods={"PATCH"})
-     *
+     * @Config\Security("is_granted('ROLE_ADMIN')")
      * @OA\Patch(
      *     path="/users/{userId}/companies/{companyId}",
      *     summary="Update User Company",

@@ -21,7 +21,7 @@ class UsersCompaniesControllerTest extends AbstractController
     public function itShouldReturn200AndUserForUsersCompaniesEditAction()
     {
         $userOneCompanyId = 'abc123';
-        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', $userOneCompanyId, ['Director']);
+        $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', $userOneCompanyId, ['ROLE_ADMIN']);
 
         $client = self::createClient();
         $jwt = $this->login($client, $userOne->getEmail(), 'passwordOne');

@@ -41,5 +41,5 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:
-        Administrator: Director
-        Director: User
+        ROLE_ADMIN: ROLE_DIRECTOR
+        ROLE_DIRECTOR: ROLE_USER

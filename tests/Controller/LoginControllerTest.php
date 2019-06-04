@@ -26,7 +26,7 @@ class LoginControllerTest extends AbstractController
         $userOneCompanyOneRoles = ['Director'];
 
         $userOne = $this->loadUser($userOneEmail, $userOnePassword, $userOneCompanyOneId, $userOneCompanyOneRoles);
-        $this->addCompanyToUser($userOne, 'xyz789', ['Administrator']);
+        $this->addCompanyToUser($userOne, 'xyz789', ['ROLE_ADMIN']);
 
         $client = self::createClient();
 
@@ -156,10 +156,10 @@ class LoginControllerTest extends AbstractController
         $userOneEmail = 'userOne@companyOne.com';
         $userOnePassword = 'passwordOne';
         $userOneCompanyOneId = 'abc123';
-        $userOneCompanyOneRoles = ['Director'];
+        $userOneCompanyOneRoles = ['ROLE_DIRECTOR'];
 
         $userOneCompanyTwoId = 'xyz789';
-        $userOneCompanyTwoRoles = ['Administrator'];
+        $userOneCompanyTwoRoles = ['ROLE_ADMIN'];
 
         $userOne = $this->loadUser($userOneEmail, $userOnePassword, $userOneCompanyOneId, $userOneCompanyOneRoles);
         $this->addCompanyToUser($userOne, $userOneCompanyTwoId, $userOneCompanyTwoRoles);
@@ -246,10 +246,10 @@ class LoginControllerTest extends AbstractController
         $userOneEmail = 'userOne@companyOne.com';
         $userOnePassword = 'passwordOne';
         $userOneCompanyOneId = 'abc123';
-        $userOneCompanyOneRoles = ['Director'];
+        $userOneCompanyOneRoles = ['ROLE_DIRECTOR'];
 
         $userOneCompanyTwoId = 'xyz789';
-        $userOneCompanyTwoRoles = ['Administrator'];
+        $userOneCompanyTwoRoles = ['ROLE_ADMIN'];
 
         $userOne = $this->loadUser($userOneEmail, $userOnePassword, $userOneCompanyOneId, $userOneCompanyOneRoles);
         $this->addCompanyToUser($userOne, $userOneCompanyTwoId, $userOneCompanyTwoRoles);

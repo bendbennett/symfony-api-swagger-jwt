@@ -32,13 +32,13 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
 
         $userCompany = new UserCompany();
         $userCompany->setCompanyId('abc123');
-        $userCompany->setRoles(['Administrator']);
+        $userCompany->setRoles(['ROLE_ADMIN']);
 
         $user->addUserCompany($userCompany);
 
         $userCompany = new UserCompany();
         $userCompany->setCompanyId('xyz789');
-        $userCompany->setRoles(['Director']);
+        $userCompany->setRoles(['ROLE_DIRECTOR']);
 
         $user->addUserCompany($userCompany);
         
