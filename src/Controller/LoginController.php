@@ -3,15 +3,15 @@
 namespace App\Controller;
 
 use App\Document\UserCompany;
+use App\Service\ActiveJwtServiceInterface;
 use App\Service\AuthenticationServiceInterface;
 use App\Service\JwtServiceInterface;
-use App\Service\ActiveJwtServiceInterface;
 use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 use Symfony\Component\Security\Core\Security;
 
 /**

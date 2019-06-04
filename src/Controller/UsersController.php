@@ -8,11 +8,10 @@ use App\Service\SerializerServiceInterface;
 use App\Service\ValidatorServiceInterface;
 use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Exception\ValidatorException;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
  * @Route("/users")
@@ -143,6 +142,7 @@ class UsersController
     /**
      * @Route("/{id}", methods={"PATCH"})
      * @Config\Security("is_granted('ROLE_DIRECTOR')")
+     * 
      * @OA\Patch(
      *     path="/users/{userId}",
      *     summary="Update User",
