@@ -137,7 +137,7 @@ class UsersController
         $this->userManager->storeUser($user);
         $serializedUser = $this->serializerService->serializeUser($user, 'json');
 
-        return new JsonResponse($serializedUser, 201, [], true);
+        return new JsonResponse($serializedUser, 200, [], true);
     }
 
     /**

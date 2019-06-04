@@ -254,7 +254,7 @@ class UsersControllerTest extends AbstractController
      * @test
      * @group UsersController::storeAction
      */
-    public function itShouldReturn201AndUserWhenLoggedInUserIsAdministratorForStore()
+    public function itShouldReturn200AndUserWhenLoggedInUserIsAdministratorForStore()
     {
         $userOnePassword = 'passwordOne';
         $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_ADMIN']);
@@ -285,7 +285,7 @@ class UsersControllerTest extends AbstractController
             ])
         );
 
-        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $user = json_decode($client->getResponse()->getContent());
 
         $this->assertEquals($userTwoEmail, $user->email);
@@ -296,7 +296,7 @@ class UsersControllerTest extends AbstractController
      * @test
      * @group UsersController::storeAction
      */
-    public function itShouldReturn201AndUserWhenLoggedInUserIsDirectorInSameCompanyForStoreAction()
+    public function itShouldReturn200AndUserWhenLoggedInUserIsDirectorInSameCompanyForStoreAction()
     {
         $userOnePassword = 'passwordOne';
         $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_DIRECTOR']);
@@ -327,7 +327,7 @@ class UsersControllerTest extends AbstractController
             ])
         );
 
-        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $user = json_decode($client->getResponse()->getContent());
 
         $this->assertEquals($userTwoEmail, $user->email);
