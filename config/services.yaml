@@ -39,7 +39,7 @@ services:
             - { name: request.param_converter, converter: doctrine.odm }
 
     jms_serializer.doctrine_object_constructor:
-        class:        '%jms_serializer.doctrine_object_constructor.class%'
+        class:        JMS\Serializer\Construction\DoctrineObjectConstructor
         public:       false
         arguments:    ["@doctrine_mongodb", "@jms_serializer.unserialize_object_constructor"]
 
