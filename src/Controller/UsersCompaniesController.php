@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/users/{id}/companies/{companyId}")
@@ -69,8 +70,6 @@ class UsersCompaniesController
         $user = $this->userManager->updateUserCompany($id, $companyId, $userCompany);
         $serializedUser = $this->serializerService->serializeUser($user, 'json');
 
-        $response = new Response($serializedUser, 200, ['Content-Type' => 'application/json']);
-
-        return $response;
+        return new JsonResponse($serializedUser, 200, [], true);
     }
 }

@@ -254,7 +254,7 @@ class UsersControllerTest extends AbstractController
      * @test
      * @group UsersController::storeAction
      */
-    public function itShouldReturn200AndUserWhenLoggedInUserIsAdministratorForStore()
+    public function itShouldReturn201AndUserWhenLoggedInUserIsAdministratorForStore()
     {
         $userOnePassword = 'passwordOne';
         $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_ADMIN']);
@@ -285,7 +285,7 @@ class UsersControllerTest extends AbstractController
             ])
         );
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
         $user = json_decode($client->getResponse()->getContent());
 
         $this->assertEquals($userTwoEmail, $user->email);
@@ -296,7 +296,7 @@ class UsersControllerTest extends AbstractController
      * @test
      * @group UsersController::storeAction
      */
-    public function itShouldReturn200AndUserWhenLoggedInUserIsDirectorInSameCompanyForStoreAction()
+    public function itShouldReturn201AndUserWhenLoggedInUserIsDirectorInSameCompanyForStoreAction()
     {
         $userOnePassword = 'passwordOne';
         $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_DIRECTOR']);
@@ -327,7 +327,7 @@ class UsersControllerTest extends AbstractController
             ])
         );
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
         $user = json_decode($client->getResponse()->getContent());
 
         $this->assertEquals($userTwoEmail, $user->email);
@@ -417,7 +417,7 @@ class UsersControllerTest extends AbstractController
      * @test
      * @group UsersController::deleteAction
      */
-    public function itShouldReturn200ForDeleteAction()
+    public function itShouldReturn204ForDeleteAction()
     {
         $userOne = $this->loadUser('userOne@companyOne.com', 'passwordOne', 'abc123', ['ROLE_ADMIN']);
 
@@ -435,7 +435,7 @@ class UsersControllerTest extends AbstractController
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
         );
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(204, $client->getResponse()->getStatusCode());
 
         $userManager = $this->bootedTestKernel->getContainer()->get('App\Manager\UserManager');
         

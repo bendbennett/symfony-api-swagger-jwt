@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/users")
@@ -61,7 +62,7 @@ class UsersController
         $users = $this->userManager->getAllUsers();
         $serializedUsers = $this->serializerService->serializeUsers($users, 'json');
 
-        return $this->preparedResponse($serializedUsers);
+        return new JsonResponse($serializedUsers, 200, [], true);
     }
 
     /**
@@ -82,7 +83,7 @@ class UsersController
     {
         $serializedUser = $this->serializerService->serializeUser($user, 'json');
 
-        return $this->preparedResponse($serializedUser);
+        return new JsonResponse($serializedUser, 200, [], true);
     }
 
     /**
@@ -104,7 +105,7 @@ class UsersController
         $user = $this->userManager->getUserByKeyValue([$key => $value]);
         $serializedUser = $this->serializerService->serializeUser($user, 'json');
 
-        return $this->preparedResponse($serializedUser);
+        return new JsonResponse($serializedUser, 200, [], true);
     }
 
     /**
@@ -136,7 +137,7 @@ class UsersController
         $this->userManager->storeUser($user);
         $serializedUser = $this->serializerService->serializeUser($user, 'json');
 
-        return $this->preparedResponse($serializedUser);
+        return new JsonResponse($serializedUser, 201, [], true);
     }
 
     /**
@@ -168,7 +169,7 @@ class UsersController
         $this->userManager->storeUser($user);
         $serializedUser = $this->serializerService->serializeUser($user, 'json');
 
-        return $this->preparedResponse($serializedUser);
+        return new JsonResponse($serializedUser, 200, [], true);
     }
 
     /**
@@ -190,20 +191,6 @@ class UsersController
         $user = $this->userManager->getUser($id);
         $this->userManager->removeUser($user);
 
-        return $this->preparedResponse();
-    }
-
-    /**
-     * Convenience to add Content-Type header and body to response
-     *
-     * @param string|null $responseBody
-     * @return Response
-     */
-    private function preparedResponse(string $responseBody = null)
-    {
-        $response = new Response($responseBody);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return new JsonResponse(null, 204);
     }
 }
