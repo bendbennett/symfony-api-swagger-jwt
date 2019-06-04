@@ -51,7 +51,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install --symlink %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "HarmBandstra\\SwaggerUiBundle\\Composer\\ScriptHandler::linkAssets",
