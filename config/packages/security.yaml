@@ -26,12 +26,12 @@ security:
             security: false
             methods: [POST]
 
-        api:
-            pattern: ^/api
+        docs:
+            pattern: ^/(docs|api)
             http_basic: ~
             logout_on_user_change: true
 
-        ai:
+        api:
             pattern: ^/(users|login)(?!token)
             stateless: true
             guard:
