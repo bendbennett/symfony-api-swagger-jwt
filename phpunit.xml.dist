@@ -9,7 +9,6 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_DIR" value="/var/www/html/app" />
         <env name="KERNEL_CLASS" value="App\Kernel" />
 
         <!-- ###+ symfony/framework-bundle ### -->
@@ -23,6 +22,11 @@
         <env name="MONGODB_URL" value="mongodb://mongo:27017"/>
         <env name="MONGODB_DB" value="demo_test"/>
         <!-- ###- doctrine/doctrine-mongodb-bundle ### -->
+
+        <!-- ###+ lexik/jwt-authentication-bundle ### -->
+        <env name="JWT_SECRET_KEY" value="config/jwt/private.pem"/>
+        <env name="JWT_PUBLIC_KEY" value="config/jwt/public.pem"/>
+        <!-- ###- lexik/jwt-authentication-bundle ### -->
     </php>
 
     <testsuites>
