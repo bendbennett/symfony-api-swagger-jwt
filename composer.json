@@ -1,5 +1,5 @@
 {
-    "name": "bendbennett/demo",
+    "name": "bendbennett/symfony-api-swagger-jwt",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -15,43 +15,40 @@
     "provide": { "ext-mongo": "1.6.12" },
     "require": {
         "php": ">=7.1.0",
-        "symfony/monolog-bundle": "^3.3",
-        "sensio/framework-extra-bundle": "^5.3",
-        "jms/serializer-bundle": "^2.4",
-        "doctrine/doctrine-migrations-bundle": "^2.0",
+        "alcaeus/mongo-php-adapter": "^1.1",
+        "doctrine/annotations": "^1.6",
         "doctrine/mongodb": "^1.6",
         "doctrine/mongodb-odm": "^1.2",
         "doctrine/mongodb-odm-bundle": "^3.5",
-        "alcaeus/mongo-php-adapter": "^1.1",
+        "jms/serializer-bundle": "^2.4",
         "lexik/jwt-authentication-bundle": "^2.6",
         "qandidate/symfony-json-request-transformer": "^1.3",
-        "zircote/swagger-php": "^3.0",
-        "symfony/flex": "^1.2",
-        "symfony/validator": "^4.3",
-        "doctrine/annotations": "^1.6",
+        "sensio/framework-extra-bundle": "^5.3",
         "symfony/dotenv": "^4.3",
-        "symfony/framework-bundle": "^4.3",
-        "symfony/var-dumper": "^4.3",
-        "symfony/security": "^4.3",
         "symfony/expression-language": "^4.3",
-        "symfony/browser-kit": "^4.3",
-        "symfony/form": "^4.3",
-        "symfony/templating": "^4.3",
+        "symfony/flex": "^1.2",
+        "symfony/framework-bundle": "^4.3",
+        "symfony/monolog-bundle": "^3.3",
+        "symfony/security": "^4.3",
+        "symfony/validator": "^4.3",
         "symfony-bundles/json-request-bundle": "^2.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.3",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
+        "harmbandstra/swagger-ui-bundle": "^4.1",
         "phpunit/phpunit": "^8.1",
+        "symfony/browser-kit": "^4.3",
         "symfony/debug-bundle": "^4.3",
-        "symfony/web-profiler-bundle": "^4.3",
+        "symfony/phpunit-bridge": "^4.3",
         "symfony/profiler-pack": "^1.0",
-        "harmbandstra/swagger-ui-bundle": "^4.1"
+        "symfony/var-dumper": "^4.3",
+        "symfony/web-profiler-bundle": "^4.3",
+        "zircote/swagger-php": "^3.0"
     },
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install --symlink %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "HarmBandstra\\SwaggerUiBundle\\Composer\\ScriptHandler::linkAssets",
@@ -68,10 +65,5 @@
     },
     "conflict": {
         "symfony/symfony": "*"
-    },
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
-        "symfony-assets-install": "relative"
     }
 }
