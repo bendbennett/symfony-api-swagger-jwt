@@ -299,10 +299,12 @@ class UsersControllerTest extends AbstractController
     public function itShouldReturn200AndUserWhenLoggedInUserIsDirectorInSameCompanyForStoreAction()
     {
         $userOnePassword = 'passwordOne';
-        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'abc123', ['ROLE_DIRECTOR']);
+        $userOneCompanyTwoId = 'abc123';
+        $userOne = $this->loadUser('userOne@companyOne.com', $userOnePassword, 'xyz789', ['ROLE_USER']);
+        $this->addCompanyToUser($userOne, $userOneCompanyTwoId, ['ROLE_DIRECTOR']);
 
         $client = self::createClient();
-        $jwt = $this->login($client, $userOne->getEmail(), $userOnePassword);
+        $jwt = $this->loginWithCompanyId($client, $userOne->getEmail(), $userOnePassword, $userOneCompanyTwoId);
 
         $userTwoEmail = 'userTwo@companyOne.com';
         $userTwoCompanyOneId = 'abc123';

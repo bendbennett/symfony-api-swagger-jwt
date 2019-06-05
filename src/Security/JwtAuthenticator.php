@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken;
 
@@ -45,37 +44,27 @@ class JwtAuthenticator implements AuthenticatorInterface
         throw $authException;
     }
 
+    public function supports(Request $request)
+    {
+        if (!$request->headers->has('Authorization')) {
+            throw new AuthenticationException('Authorization header is missing from request.');
+        }
+
+        return true;
+    }
+
     public function getCredentials(Request $request) : string
     {
-        if (!$request->headers->has('Authorization')) {
-            throw new AuthenticationException('Authorization header is missing from request.');
-        }
-
         $token = $this->authorizationHeaderTokenExtractor->extract($request);
 
-        if (!$token) {
-            throw new AuthenticationException('Token could not be extracted from Authorization header.');
+        if (!is_string($token) || empty($token)) {
+            throw new AuthenticationException('Token is missing from Authorization header.');
         }
 
         return $token;
     }
 
-    public function supports(\Symfony\Component\HttpFoundation\Request $request)
-    {
-        if (!$request->headers->has('Authorization')) {
-            throw new AuthenticationException('Authorization header is missing from request.');
-        }
-
-        $token = $this->authorizationHeaderTokenExtractor->extract($request);
-
-        if (!$token) {
-            throw new AuthenticationException('Token could not be extracted from Authorization header.');
-        }
-
-        return $token;
-    }
-
-    public function createAuthenticatedToken(\Symfony\Component\Security\Core\User\UserInterface $user, $providerKey)
+    public function createAuthenticatedToken(UserInterface $user, $providerKey)
     {
         return new PostAuthenticationGuardToken($user, $providerKey, $user->getRoles());
     }

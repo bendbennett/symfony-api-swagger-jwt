@@ -93,6 +93,26 @@ class AbstractController extends WebTestCase
         return $responseAsArray['token'];
     }
 
+    protected function loginWithCompanyId(KernelBrowser $client, string $email, string $password, string $companyId)
+    {
+        $client->request(
+            'POST',
+            '/login',
+            array(),
+            array(),
+            array('CONTENT_TYPE' => 'application/json'),
+            json_encode([
+                'email' => $email,
+                'password' => $password,
+                'companyId' => $companyId
+            ])
+        );
+
+        $responseAsArray = json_decode($client->getResponse()->getContent(), true);
+
+        return $responseAsArray['token'];
+    }
+
     protected function getUserManager()
     {
         return $this->bootedTestKernel->getContainer()->get('doctrine_mongodb')->getManager();

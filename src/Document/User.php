@@ -70,7 +70,7 @@ class User implements UserInterface
      *
      * DoctrineMongoListener is used to extract roles from JWT and call setRoles() following postLoad of Document.
      *
-     * User::getRoles() is called when @ Security("has_role('Director')") annotation is evaluated.
+     * User::getRoles() is called when @ Security("is_granted('ROLE_xxx')") annotation is evaluated.
      *
      * @JMS\Exclude
      */
