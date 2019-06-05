@@ -33,8 +33,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array('CONTENT_TYPE' => 'application/json'),
             json_encode([
                 'email' => $userOneEmail,
@@ -64,8 +64,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array('CONTENT_TYPE' => 'application/json'),
             json_encode([])
         );
@@ -84,8 +84,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array('CONTENT_TYPE' => 'application/json'),
             json_encode([
                 'email' => 'johnny@somewhere.com',
@@ -106,8 +106,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array('CONTENT_TYPE' => 'application/json'),
             json_encode([
                 'email' => 'johnny@somewhere.com',
@@ -135,8 +135,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array('CONTENT_TYPE' => 'application/json'),
             json_encode([
                 'email' => $userOneEmail,
@@ -170,8 +170,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login/company/' . $userOneCompanyTwoId,
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -199,8 +199,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login/company/abc123',
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer ")
@@ -227,8 +227,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'POST',
             '/login/company/' . $userOneCompanyOneId,
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -260,8 +260,8 @@ class LoginControllerTest extends AbstractController
         $client->request(
             'PUT',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")

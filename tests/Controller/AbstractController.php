@@ -6,7 +6,6 @@ use App\Kernel;
 use App\Document\User;
 use App\Document\UserCompany;
 use Doctrine\Common\DataFixtures\Purger\MongoDBPurger;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -79,8 +78,8 @@ class AbstractController extends WebTestCase
         $client->request(
             'POST',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array('CONTENT_TYPE' => 'application/json'),
             json_encode([
                 'email' => $email,
@@ -98,8 +97,8 @@ class AbstractController extends WebTestCase
         $client->request(
             'POST',
             '/login',
-            array(),
-            array(),
+            [],
+            [],
             array('CONTENT_TYPE' => 'application/json'),
             json_encode([
                 'email' => $email,

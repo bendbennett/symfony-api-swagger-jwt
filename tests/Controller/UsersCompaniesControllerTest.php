@@ -32,8 +32,8 @@ class UsersCompaniesControllerTest extends AbstractController
         $client->request(
             'PATCH',
             '/users/' . $userOne->getId() . '/companies/' . $userOneCompanyId,
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt"),

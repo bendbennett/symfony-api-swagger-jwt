@@ -31,8 +31,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users',
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -59,8 +59,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users',
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -88,8 +88,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users/' . $userTwo->getId(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -122,8 +122,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users/' . $userTwo->getId(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -153,8 +153,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users/' . $userOne->getId(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -182,8 +182,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users/' . $userOne->getId(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -211,8 +211,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users/email/' . $userTwo->getEmail(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -240,8 +240,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'GET',
             '/users/email/' . $userOne->getEmail(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")
@@ -268,8 +268,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'POST',
             '/users',
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt"),
@@ -312,8 +312,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'POST',
             '/users',
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt"),
@@ -354,8 +354,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'POST',
             '/users',
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt"),
@@ -392,8 +392,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'PATCH',
             '/users/' . $userOne->getId(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt"),
@@ -430,8 +430,8 @@ class UsersControllerTest extends AbstractController
         $client->request(
             'DELETE',
             '/users/' . $userOne->getId(),
-            array(),
-            array(),
+            [],
+            [],
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_AUTHORIZATION' => "Bearer $jwt")

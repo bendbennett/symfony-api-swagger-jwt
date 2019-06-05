@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-use App\Document\User;
-use App\Document\UserCompany;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ValidatorService implements ValidatorServiceInterface
