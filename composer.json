@@ -12,7 +12,7 @@
             "App\\Tests\\": "tests/"
         }
     },
-    "provide": { "ext-mongo": "1.6.12" },
+    "provide": { "ext-mongo": "*" },
     "require": {
         "php": ">=7.1.0",
         "alcaeus/mongo-php-adapter": "^1.1",
