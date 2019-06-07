@@ -36,8 +36,7 @@ class UsersCompaniesController
         UserManager $userManager,
         SerializerServiceInterface $serializerService,
         ValidatorServiceInterface $validatorService
-    )
-    {
+    ) {
         $this->userManager = $userManager;
         $this->serializerService = $serializerService;
         $this->validatorService = $validatorService;

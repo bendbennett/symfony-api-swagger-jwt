@@ -37,19 +37,19 @@ class ActiveJwtService implements ActiveJwtServiceInterface
             return [];
         }
 
-        if(!$this->request->headers->has('Authorization')) {
+        if (!$this->request->headers->has('Authorization')) {
             return [];
         }
 
         $token = $this->authorizationHeaderTokenExtractor->extract($this->request);
 
-        if(!$token) {
+        if (!$token) {
             return [];
         }
 
         $payload = $this->jwtEncoder->decode($token);
 
-        if(!$payload){
+        if (!$payload) {
             return [];
         }
 

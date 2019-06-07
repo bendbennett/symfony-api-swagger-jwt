@@ -193,9 +193,10 @@ class User implements UserInterface
     public function getUserCompanyById(string $companyId)
     {
         $userCompany = $this->getUserCompanies()->filter(
-            function($userCompany) use ($companyId) {
+            function ($userCompany) use ($companyId) {
                 return $userCompany->getCompanyId() === $companyId;
-        })->first();
+            }
+        )->first();
 
         return $userCompany;
     }

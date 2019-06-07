@@ -43,8 +43,8 @@ class LoginController
         AuthenticationServiceInterface $authenticationService,
         JwtServiceInterface $jwtService,
         ActiveJwtServiceInterface $activeJwtService,
-        Security $security)
-    {
+        Security $security
+    ) {
         $this->authenticationService = $authenticationService;
         $this->jwtService = $jwtService;
         $this->activeJwtService = $activeJwtService;
@@ -174,5 +174,4 @@ class LoginController
 
         return new JsonResponse(['token' => $jwt]);
     }
-
 }

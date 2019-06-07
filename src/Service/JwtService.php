@@ -81,7 +81,7 @@ class JwtService implements JwtServiceInterface
     {
         $processedCustomClaims = [];
 
-        foreach($customClaims as $claimKey => $claimValue) {
+        foreach ($customClaims as $claimKey => $claimValue) {
             if (in_array($claimKey, $this->customClaims)) {
                 $processedCustomClaims[$claimKey] = $claimValue;
             }

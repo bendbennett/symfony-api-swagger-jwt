@@ -134,8 +134,7 @@ class UserVoter extends Voter
 
         if (count(array_intersect($this->activeJwtService->getPayloadRoles(), self::ALLOWED_ROLES)) > 0) {
             foreach ($userDeserializedFromRequest->getUserCompanies() as $userCompany) {
-                if ($userCompany->getCompanyId() === $this->activeJwtService->getPayload()['companyId'])
-                {
+                if ($userCompany->getCompanyId() === $this->activeJwtService->getPayload()['companyId']) {
                     return true;
                 }
             }

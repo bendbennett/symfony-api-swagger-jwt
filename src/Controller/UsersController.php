@@ -37,8 +37,8 @@ class UsersController
     public function __construct(
         UserManager $userManager,
         SerializerServiceInterface $serializerService,
-        ValidatorServiceInterface $validatorService)
-    {
+        ValidatorServiceInterface $validatorService
+    ) {
         $this->userManager = $userManager;
         $this->serializerService = $serializerService;
         $this->validatorService = $validatorService;
@@ -142,7 +142,7 @@ class UsersController
     /**
      * @Route("/{id}", methods={"PATCH"})
      * @Config\Security("is_granted('ROLE_DIRECTOR')")
-     * 
+     *
      * @OA\Patch(
      *     path="/users/{userId}",
      *     summary="Update User",

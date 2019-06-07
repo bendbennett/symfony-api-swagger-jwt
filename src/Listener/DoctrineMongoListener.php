@@ -28,5 +28,4 @@ class DoctrineMongoListener
             $document->setRoles($this->activeJwtService->getPayloadRoles());
         }
     }
-
 }
