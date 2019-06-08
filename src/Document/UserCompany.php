@@ -41,7 +41,7 @@ class UserCompany
      * @param string $companyId
      * @return self
      */
-    public function setCompanyId($companyId): self
+    public function setCompanyId(string $companyId): self
     {
         $this->companyId = $companyId;
         return $this;
@@ -62,7 +62,7 @@ class UserCompany
      * @param array $roles
      * @return self
      */
-    public function setRoles($roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
         return $this;

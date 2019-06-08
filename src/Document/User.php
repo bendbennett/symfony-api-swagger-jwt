@@ -3,7 +3,7 @@
 namespace App\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use \Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use JMS\Serializer\Annotation as JMS;
 use OpenApi\Annotations as OA;
@@ -101,7 +101,7 @@ class User implements UserInterface
      * @param string $email
      * @return self
      */
-    public function setEmail($email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
@@ -123,7 +123,7 @@ class User implements UserInterface
      * @param string $firstName
      * @return self
      */
-    public function setFirstName($firstName): self
+    public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
         return $this;
@@ -145,7 +145,7 @@ class User implements UserInterface
      * @param string $lastName
      * @return self
      */
-    public function setLastName($lastName): self
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
         return $this;
@@ -208,7 +208,7 @@ class User implements UserInterface
      * @param string $password
      * @return self
      */
-    public function setPassword($password): self
+    public function setPassword(string $password): self
     {
         $this->password = $password;
         return $this;

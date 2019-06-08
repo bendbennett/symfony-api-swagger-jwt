@@ -35,7 +35,7 @@ class AuthenticationService implements AuthenticationServiceInterface
         return $user;
     }
 
-    public function loginToCompany($email, $password, $companyId): User
+    public function loginToCompany(string $email, string $password, string $companyId): User
     {
         try {
             $user = $this->userManager->getUserByEmailAndCompanyId($email, $companyId);
