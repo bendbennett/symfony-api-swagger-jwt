@@ -22,7 +22,7 @@ class AuthenticationService implements AuthenticationServiceInterface
         $this->userManager = $userManager;
     }
 
-    public function login(string $email, string $password) : User
+    public function login(string $email, string $password): User
     {
         try {
             $user = $this->userManager->getUserByKeyValue(['email' => $email]);
@@ -35,7 +35,7 @@ class AuthenticationService implements AuthenticationServiceInterface
         return $user;
     }
 
-    public function loginToCompany($email, $password, $companyId) : User
+    public function loginToCompany($email, $password, $companyId): User
     {
         try {
             $user = $this->userManager->getUserByEmailAndCompanyId($email, $companyId);
@@ -48,7 +48,7 @@ class AuthenticationService implements AuthenticationServiceInterface
         return $user;
     }
 
-    private function validatePassword(User $user, string $password) : bool
+    private function validatePassword(User $user, string $password): bool
     {
         if (!$this->userManager->isPasswordValid($user, $password)) {
             throw new UnauthorizedHttpException('Password is invalid.');

@@ -3,6 +3,7 @@
 namespace App\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use \Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use JMS\Serializer\Annotation as JMS;
 use OpenApi\Annotations as OA;
@@ -89,7 +90,7 @@ class User implements UserInterface
      *
      * @return string $id
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -100,7 +101,7 @@ class User implements UserInterface
      * @param string $email
      * @return self
      */
-    public function setEmail($email)
+    public function setEmail($email): self
     {
         $this->email = $email;
         return $this;
@@ -111,7 +112,7 @@ class User implements UserInterface
      *
      * @return string $email
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -122,7 +123,7 @@ class User implements UserInterface
      * @param string $firstName
      * @return self
      */
-    public function setFirstName($firstName)
+    public function setFirstName($firstName): self
     {
         $this->firstName = $firstName;
         return $this;
@@ -133,7 +134,7 @@ class User implements UserInterface
      *
      * @return string $firstName
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -144,7 +145,7 @@ class User implements UserInterface
      * @param string $lastName
      * @return self
      */
-    public function setLastName($lastName)
+    public function setLastName($lastName): self
     {
         $this->lastName = $lastName;
         return $this;
@@ -155,7 +156,7 @@ class User implements UserInterface
      *
      * @return string $lastName
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -165,7 +166,7 @@ class User implements UserInterface
      *
      * @param \App\Document\UserCompany $userCompany
      */
-    public function addUserCompany(UserCompany $userCompany)
+    public function addUserCompany(UserCompany $userCompany): void
     {
         $this->userCompanies[] = $userCompany;
     }
@@ -175,7 +176,7 @@ class User implements UserInterface
      *
      * @param \App\Document\UserCompany $userCompany
      */
-    public function removeUserCompany(UserCompany $userCompany)
+    public function removeUserCompany(UserCompany $userCompany): void
     {
         $this->userCompanies->removeElement($userCompany);
     }
@@ -185,7 +186,7 @@ class User implements UserInterface
      *
      * @return \Doctrine\Common\Collections\Collection $userCompanies
      */
-    public function getUserCompanies()
+    public function getUserCompanies(): Collection
     {
         return $this->userCompanies;
     }
@@ -207,7 +208,7 @@ class User implements UserInterface
      * @param string $password
      * @return self
      */
-    public function setPassword($password)
+    public function setPassword($password): self
     {
         $this->password = $password;
         return $this;
@@ -218,15 +219,16 @@ class User implements UserInterface
      *
      * @return string $password
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
 
-    public function setRoles(array $roles)
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+        return $this;
     }
 
     /**
@@ -234,22 +236,22 @@ class User implements UserInterface
      * These are roles extracted from the JWT to ensure that secured endpoints are not accessed without user having
      * appropriate role(s). See $roles property above.
      */
-    public function getRoles() : array
+    public function getRoles(): array
     {
         return $this->roles;
     }
 
-    public function getSalt()
+    public function getSalt(): void
     {
-        return null;
+        return;
     }
 
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->getEmail();
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): bool
     {
         return true;
     }

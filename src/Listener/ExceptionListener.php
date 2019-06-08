@@ -21,7 +21,7 @@ class ExceptionListener
         UnauthorizedHttpException::class => Response::HTTP_UNAUTHORIZED
     ];
 
-    public function onKernelException(GetResponseForExceptionEvent $event)
+    public function onKernelException(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
 

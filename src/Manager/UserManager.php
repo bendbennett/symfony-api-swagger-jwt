@@ -19,13 +19,17 @@ class UserManager extends DocumentManager
      */
     protected $passwordEncoder;
 
-    public function __construct(Connection $conn = null, Configuration $config = null, EventManager $eventManager = null, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        Connection $conn = null,
+        Configuration $config = null,
+        EventManager $eventManager = null,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         $this->passwordEncoder = $passwordEncoder;
         parent::__construct($conn, $config, $eventManager);
     }
 
-    public function encodePassword(User $user, string $password) : User
+    public function encodePassword(User $user, string $password): User
     {
         $password = $this->passwordEncoder->encodePassword($user, $password);
         $user->setPassword($password);
@@ -33,48 +37,48 @@ class UserManager extends DocumentManager
         return $user;
     }
 
-    public function isPasswordValid(User $user, string $password) : bool
+    public function isPasswordValid(User $user, string $password): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $password);
     }
 
-    public function getAllUsers() : array
+    public function getAllUsers(): array
     {
         return $this->getRepository(self::USER_REPOSITORY)->findAll();
     }
 
-    public function getUser(string $id) : User
+    public function getUser(string $id): User
     {
         return $this->getRepository(self::USER_REPOSITORY)->find($id);
     }
 
-    public function getUserByIdAndCompanyId(string $id, string $companyId) : User
+    public function getUserByIdAndCompanyId(string $id, string $companyId): User
     {
         return $this->getRepository(self::USER_REPOSITORY)->getUserByIdAndCompanyId($id, $companyId);
     }
 
-    public function getUserByEmailAndCompanyId(string $email, string $companyId)
+    public function getUserByEmailAndCompanyId(string $email, string $companyId): User
     {
         return $this->getRepository(self::USER_REPOSITORY)->getUserByEmailAndCompanyId($email, $companyId);
     }
 
-    public function getUserByKeyValue(array $criteria) : User
+    public function getUserByKeyValue(array $criteria): User
     {
         return $this->getRepository(self::USER_REPOSITORY)->findOneBy($criteria);
     }
 
-    public function storeUser(User $user)
+    public function storeUser(User $user): void
     {
         $this->persist($user);
         $this->flush();
     }
 
-    public function updateUserCompany(string $id, string $companyId, UserCompany $userCompany) : User
+    public function updateUserCompany(string $id, string $companyId, UserCompany $userCompany): User
     {
         return $this->getRepository(self::USER_REPOSITORY)->updateUserCompany($id, $companyId, $userCompany);
     }
 
-    public function removeUser(User $user)
+    public function removeUser(User $user): void
     {
         $this->remove($user);
         $this->flush();

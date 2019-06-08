@@ -71,7 +71,7 @@ class LoginController
      *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
-    public function login(Request $request) : JsonResponse
+    public function login(Request $request): JsonResponse
     {
         $email = $request->request->get('email');
         $password = $request->request->get('password');
@@ -118,7 +118,7 @@ class LoginController
      *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
-    public function refreshJwt() : JsonResponse
+    public function refreshJwt(): JsonResponse
     {
         $payload = $this->activeJwtService->getPayload();
         $jwt = $this->jwtService->generateJwt($payload['sub'], ['roles' => $payload['roles'], 'companyId' => $payload['companyId']]);
@@ -151,7 +151,7 @@ class LoginController
      *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
-    public function switchCompany(string $companyId) : JsonResponse
+    public function switchCompany(string $companyId): JsonResponse
     {
         if (empty($companyId)) {
             throw new InvalidArgumentException('companyId is empty.');

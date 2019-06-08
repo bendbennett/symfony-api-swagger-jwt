@@ -4,5 +4,5 @@ namespace App\Service;
 
 interface JwtServiceInterface
 {
-    public function generateJwt(string $userId, array $customClaims) : string;
+    public function generateJwt(string $userId, array $customClaims): string;
 }

@@ -56,7 +56,7 @@ class UsersController
      *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
-    public function indexAction()
+    public function indexAction(): JsonResponse
     {
         $users = $this->userManager->getAllUsers();
         $serializedUsers = $this->serializerService->serializeUsers($users, 'json');

@@ -18,7 +18,7 @@ class DoctrineMongoListener
         $this->activeJwtService = $activeJwtService;
     }
 
-    public function postLoad(LifecycleEventArgs $args)
+    public function postLoad(LifecycleEventArgs $args): void
     {
         $document = $args->getDocument();
 

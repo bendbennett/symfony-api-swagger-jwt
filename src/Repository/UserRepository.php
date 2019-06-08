@@ -21,7 +21,7 @@ class UserRepository extends DocumentRepository
         $this->serializerService = $serializerService;
     }
 
-    public function getUserByIdAndCompanyId(string $id, string $companyId)
+    public function getUserByIdAndCompanyId(string $id, string $companyId): User
     {
         $user = $this->createQueryBuilder()
             ->field('_id')->equals($id)
@@ -36,7 +36,7 @@ class UserRepository extends DocumentRepository
         return $user;
     }
 
-    public function getUserByEmailAndCompanyId(string $email, string $companyId)
+    public function getUserByEmailAndCompanyId(string $email, string $companyId): User
     {
         $user = $this->createQueryBuilder()
             ->field('email')->equals($email)
@@ -51,7 +51,7 @@ class UserRepository extends DocumentRepository
         return $user;
     }
 
-    public function updateUserCompany(string $id, string $companyId, UserCompany $userCompany) : User
+    public function updateUserCompany(string $id, string $companyId, UserCompany $userCompany): User
     {
         $user = $this->createQueryBuilder()
             ->findAndUpdate()
@@ -69,7 +69,7 @@ class UserRepository extends DocumentRepository
         return $user;
     }
 
-    public function find($id, $lockMode = LockMode::NONE, $lockVersion = null)
+    public function find($id, $lockMode = LockMode::NONE, $lockVersion = null): User
     {
         $user = parent::find($id, $lockMode, $lockVersion);
 
@@ -80,7 +80,7 @@ class UserRepository extends DocumentRepository
         return $user;
     }
 
-    public function findOneBy(array $criteria)
+    public function findOneBy(array $criteria): User
     {
         $user = parent::findOneBy($criteria);
 

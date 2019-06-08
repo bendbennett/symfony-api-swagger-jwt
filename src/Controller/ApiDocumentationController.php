@@ -10,11 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ApiDocumentationController
 {
-    protected $kernelRootDir;
+    protected $kernelProjectDir;
 
-    public function __construct($kernelRootDir)
+    public function __construct(string $kernelProjectDir)
     {
-        $this->kernelRootDir = $kernelRootDir;
+        $this->kernelProjectDir = $kernelProjectDir;
     }
 
     /**
@@ -28,9 +28,9 @@ class ApiDocumentationController
      *
      * @Route("/swagger.json")
      */
-    public function jsonAction()
+    public function jsonAction(): JsonResponse
     {
-        $swagger = \OpenApi\scan($this->kernelRootDir . '/src');
+        $swagger = \OpenApi\scan($this->kernelProjectDir . '/src');
 
         return new JsonResponse($swagger);
     }

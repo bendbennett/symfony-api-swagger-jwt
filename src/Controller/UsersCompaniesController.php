@@ -58,7 +58,7 @@ class UsersCompaniesController
      *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
-    public function editAction(Request $request, string $id, string $companyId)
+    public function editAction(Request $request, string $id, string $companyId): JsonResponse
     {
         $userCompany = $this->serializerService->deserializeUserCompanyFromJson($request->getContent(), 'json', $companyId);
 

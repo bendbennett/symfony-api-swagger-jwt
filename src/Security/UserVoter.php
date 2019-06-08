@@ -45,7 +45,7 @@ class UserVoter extends Voter
      * However, paramConverter sets user on the request which can be obtained from the request.
      *
      */
-    protected function supports($attribute, $subject) : bool
+    protected function supports($attribute, $subject): bool
     {
         // if the attribute isn't one we support, return false
         if (!in_array($attribute, array(self::VIEW, self::CREATE))) {
@@ -77,7 +77,7 @@ class UserVoter extends Voter
      * @param TokenInterface $token
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token) : bool
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $request = $this->requestStack->getCurrentRequest();
         $user = $request->get('user');
@@ -107,7 +107,7 @@ class UserVoter extends Voter
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canView(User $userDeserializedFromRequest, User $loggedInUser) : bool
+    private function canView(User $userDeserializedFromRequest, User $loggedInUser): bool
     {
         if (count(array_intersect($this->activeJwtService->getPayloadRoles(), self::GLOBAL_ROLES)) > 0) {
             return true;
@@ -126,7 +126,7 @@ class UserVoter extends Voter
         return false;
     }
 
-    private function canCreate(User $userDeserializedFromRequest) : bool
+    private function canCreate(User $userDeserializedFromRequest): bool
     {
         if (count(array_intersect($this->activeJwtService->getPayloadRoles(), self::GLOBAL_ROLES)) > 0) {
             return true;

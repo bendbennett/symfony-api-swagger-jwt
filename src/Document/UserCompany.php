@@ -41,7 +41,7 @@ class UserCompany
      * @param string $companyId
      * @return self
      */
-    public function setCompanyId($companyId)
+    public function setCompanyId($companyId): self
     {
         $this->companyId = $companyId;
         return $this;
@@ -51,7 +51,7 @@ class UserCompany
      *
      * @return string $companyId
      */
-    public function getCompanyId()
+    public function getCompanyId(): string
     {
         return $this->companyId;
     }
@@ -62,7 +62,7 @@ class UserCompany
      * @param array $roles
      * @return self
      */
-    public function setRoles($roles)
+    public function setRoles($roles): self
     {
         $this->roles = $roles;
         return $this;
@@ -71,9 +71,9 @@ class UserCompany
     /**
      * Get roles
      *
-     * @return string $roles
+     * @return array $roles
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         return $this->roles;
     }

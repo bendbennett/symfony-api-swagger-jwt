@@ -16,12 +16,12 @@ class ValidatorService implements ValidatorServiceInterface
         $this->validator = $validator;
     }
 
-    public function isValid($documentToValidate) : bool
+    public function isValid($documentToValidate): bool
     {
         return count($this->validator->validate($documentToValidate)) > 0 ? false : true;
     }
 
-    public function getValidationErrors($documentToValidate) : string
+    public function getValidationErrors($documentToValidate): string
     {
         return (string)$this->validator->validate($documentToValidate);
     }

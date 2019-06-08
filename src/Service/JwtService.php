@@ -41,7 +41,7 @@ class JwtService implements JwtServiceInterface
         $this->customClaims = $customClaims;
     }
 
-    public function generateJwt(string $userId, array $customClaims) : string
+    public function generateJwt(string $userId, array $customClaims): string
     {
         $registeredClaims = $this->generateRegisteredClaims($userId);
         $customClaims = $this->generateCustomClaims($customClaims);
@@ -52,7 +52,7 @@ class JwtService implements JwtServiceInterface
         return $token;
     }
 
-    private function generateRegisteredClaims(string $userId) : array
+    private function generateRegisteredClaims(string $userId): array
     {
         $registeredClaims = [];
 
@@ -77,7 +77,7 @@ class JwtService implements JwtServiceInterface
         return $registeredClaims;
     }
 
-    private function generateCustomClaims(array $customClaims)
+    private function generateCustomClaims(array $customClaims): array
     {
         $processedCustomClaims = [];
 

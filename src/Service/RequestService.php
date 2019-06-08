@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
 class RequestService implements RequestServiceInterface
 {
-    public function verifyOrAddIdToRequest(string $dataToDeserialize, string $id, string $idName) : string
+    public function verifyOrAddIdToRequest(string $dataToDeserialize, string $id, string $idName): string
     {
         $jsonAsObject = $this->convertJsonToObject($dataToDeserialize);
 
@@ -22,7 +22,7 @@ class RequestService implements RequestServiceInterface
         return json_encode($jsonAsObject);
     }
 
-    private function convertJsonToObject(string $json) : \stdClass
+    private function convertJsonToObject(string $json): \stdClass
     {
         $jsonAsObject = json_decode($json);
 

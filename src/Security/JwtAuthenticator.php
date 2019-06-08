@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken;
+use Symfony\Component\Security\Guard\Token\GuardTokenInterface;
 
 class JwtAuthenticator implements AuthenticatorInterface
 {
@@ -39,12 +40,12 @@ class JwtAuthenticator implements AuthenticatorInterface
         $this->authorizationHeaderTokenExtractor = $authorizationHeaderTokenExtractor;
     }
 
-    public function start(Request $request, AuthenticationException $authException = null)
+    public function start(Request $request, AuthenticationException $authException = null): void
     {
         throw $authException;
     }
 
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         if (!$request->headers->has('Authorization')) {
             throw new AuthenticationException('Authorization header is missing from request.');
@@ -53,7 +54,7 @@ class JwtAuthenticator implements AuthenticatorInterface
         return true;
     }
 
-    public function getCredentials(Request $request) : string
+    public function getCredentials(Request $request): string
     {
         $token = $this->authorizationHeaderTokenExtractor->extract($request);
 
@@ -64,12 +65,12 @@ class JwtAuthenticator implements AuthenticatorInterface
         return $token;
     }
 
-    public function createAuthenticatedToken(UserInterface $user, $providerKey)
+    public function createAuthenticatedToken(UserInterface $user, $providerKey): GuardTokenInterface
     {
         return new PostAuthenticationGuardToken($user, $providerKey, $user->getRoles());
     }
 
-    public function getUser($token, UserProviderInterface $userProvider) : User
+    public function getUser($token, UserProviderInterface $userProvider): User
     {
         $data = $this->jwtEncoder->decode($token);
 
@@ -90,22 +91,22 @@ class JwtAuthenticator implements AuthenticatorInterface
         return $user;
     }
 
-    public function checkCredentials($token, UserInterface $user)
+    public function checkCredentials($token, UserInterface $user): bool
     {
         return true;
     }
 
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): void
     {
         throw $exception;
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): void
     {
         return;
     }
 
-    public function supportsRememberMe()
+    public function supportsRememberMe(): bool
     {
         return false;
     }

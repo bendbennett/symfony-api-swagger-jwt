@@ -31,7 +31,7 @@ class ActiveJwtService implements ActiveJwtServiceInterface
         $this->authorizationHeaderTokenExtractor = $authorizationHeaderTokenExtractor;
     }
 
-    public function getPayload() : array
+    public function getPayload(): array
     {
         if (!$this->request instanceof Request) {
             return [];
@@ -56,13 +56,13 @@ class ActiveJwtService implements ActiveJwtServiceInterface
         return $payload;
     }
 
-    public function getPayloadRoles() : array
+    public function getPayloadRoles(): array
     {
         $payload = $this->getPayload();
         return $payload['roles'] ?? [];
     }
 
-    public function getPayloadId() : string
+    public function getPayloadId(): string
     {
         $payload = $this->getPayload();
         return $payload['sub'] ?? '';
