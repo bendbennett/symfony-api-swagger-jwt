@@ -96,7 +96,7 @@ class UsersController
      *     security={{"jwt":{}}},
      *     @OA\Parameter(name="key", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Parameter(name="value", in="path", required=true, @OA\Schema(type="string")),
-     *     @OA\Response(response="200", description="All Users.", @OA\MediaType(mediaType="application/json"))
+     *     @OA\Response(response="200", description="User(s) by key-value.", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function searchAction(string $key, string $value)
@@ -183,7 +183,7 @@ class UsersController
      *     tags={"Users"},
      *     security={{"jwt":{}}},
      *     @OA\Parameter(name="userId", in="path", required=true, @OA\Schema(type="string")),
-     *     @OA\Response(response="200", description="Success", @OA\MediaType(mediaType="application/json"))
+     *     @OA\Response(response="204", description="Success", @OA\MediaType(mediaType="application/json"))
      * )
      */
     public function deleteAction(string $id)
